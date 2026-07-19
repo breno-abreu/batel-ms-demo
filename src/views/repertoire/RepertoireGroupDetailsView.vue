@@ -382,10 +382,8 @@ import {
 } from '@/services/repertoireGroupService'
 import { repertoireService } from '@/services/repertoireService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type { RepertoireListItem } from '@/types/repertoire'
 import type { RepertoireGroup, UpdateRepertoireGroupRequest } from '@/types/repertoireGroup'
-import { Permissions } from '@/utils/permissions'
 
 const NAME_MAX_LENGTH = 120
 const DESCRIPTION_MAX_LENGTH = 2000
@@ -441,11 +439,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageRepertoire(): boolean {
-      return this.authStore.hasPermission(Permissions.RepertoireManage)
+      return true
     },
     groupId(): number | null {
       const parsedId = Number(this.$route.params.id)
@@ -456,11 +451,7 @@ export default defineComponent({
         return false
       }
 
-      return this.authStore.hasPermission(Permissions.RepertoireGroupsManage)
-        || (
-          this.authStore.hasPermission(Permissions.RepertoireGroupsManageOwn)
-          && this.group.isOwnedByCurrentUser
-        )
+      return true
     },
     pageTitle(): string {
       return this.group?.name ?? 'Pasta do repertório'

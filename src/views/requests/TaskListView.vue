@@ -661,7 +661,6 @@ import { priorityService } from '@/services/priorityService'
 import { toastService } from '@/services/toastService'
 import { workTaskService } from '@/services/workTaskService'
 import { workTaskStatusService } from '@/services/workTaskStatusService'
-import { useAuthStore } from '@/stores/authStore'
 import type { Ministry, PersonSummary } from '@/types/people'
 import type {
   CreateWorkTaskPayload,
@@ -670,7 +669,6 @@ import type {
   WorkTaskStatus
 } from '@/types/requests'
 import type { Priority } from '@/types/tickets'
-import { Permissions } from '@/utils/permissions'
 import {
   getWorkTaskStatusLifecycleClass,
   getWorkTaskStatusLifecycleFlag
@@ -770,20 +768,14 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageAllTasks(): boolean {
-      return this.authStore.hasPermission(Permissions.TasksView)
-        || this.authStore.hasPermission(Permissions.TasksManageAll)
+      return true
     },
     canManageOwnTasks(): boolean {
-      return this.authStore.hasPermission(Permissions.TasksManageOwn)
-        || this.authStore.hasPermission(Permissions.TasksViewOwn)
+      return true
     },
     canViewAllTasks(): boolean {
-      return this.authStore.hasPermission(Permissions.TasksView)
-        || this.authStore.hasPermission(Permissions.TasksManageAll)
+      return true
     },
     canCreateTask(): boolean {
       return this.canManageAllTasks || this.canManageOwnTasks
@@ -864,12 +856,8 @@ export default defineComponent({
     this.clearSearchDebounce()
   },
   methods: {
-    canManageTask(item: WorkTaskListItem): boolean {
-      if (this.canManageAllTasks) {
-        return true
-      }
-
-      return this.canManageOwnTasks && item.createdByUserId === this.authStore.user?.id
+    canManageTask(_item: WorkTaskListItem): boolean {
+      return true
     },
 
     getStatusBadgeClass(item: WorkTaskListItem): string {

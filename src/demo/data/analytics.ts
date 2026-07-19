@@ -1,20 +1,18 @@
 /**
- * Reexporta os mocks de analytics existentes, controlados por IS_DEMO_MODE
- * através das flags USE_*_ANALYTICS_MOCK.
+ * Reexporta os mocks de analytics usados pela demonstração.
  */
 export {
   getMockEngagementAnalytics,
   getMockInactivePeople,
-  MOCK_ANALYTICS_MINISTRIES,
-  USE_ENGAGEMENT_ANALYTICS_MOCK
+  MOCK_ANALYTICS_MINISTRIES
 } from '@/services/analyticsEngagementMock'
 
-export {
-  getMockEventAnalytics,
-  USE_EVENT_ANALYTICS_MOCK
-} from '@/services/analyticsEventsMock'
+export { getMockEventAnalytics } from '@/services/analyticsEventsMock'
+
+export { getMockMusicAnalytics } from '@/services/analyticsMusicMock'
 
 export {
-  getMockMusicAnalytics,
+  USE_ENGAGEMENT_ANALYTICS_MOCK,
+  USE_EVENT_ANALYTICS_MOCK,
   USE_MUSIC_ANALYTICS_MOCK
-} from '@/services/analyticsMusicMock'
+} from '@/services/analyticsService'

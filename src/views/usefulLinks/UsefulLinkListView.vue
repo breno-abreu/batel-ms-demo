@@ -268,9 +268,7 @@ import { confirmDialogService } from '@/services/confirmDialogService'
 import { usefulLinkService } from '@/services/usefulLinkService'
 import { usefulLinkTypeService } from '@/services/usefulLinkTypeService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type { UsefulLink, UsefulLinkType } from '@/types/usefulLinks'
-import { Permissions } from '@/utils/permissions'
 
 const USEFUL_LINK_PAGE_SIZE = 20
 const SEARCH_DEBOUNCE_MS = 400
@@ -312,11 +310,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageLinks(): boolean {
-      return this.authStore.hasPermission(Permissions.UsefulLinksManage)
+      return true
     },
     hasActiveFilters(): boolean {
       return this.searchQuery.trim().length > 0 || this.typeFilterId !== null

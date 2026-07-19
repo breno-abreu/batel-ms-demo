@@ -265,7 +265,6 @@ import {
 import { eventScheduleTemplateService } from '@/services/eventScheduleTemplateService'
 import { personService } from '@/services/personService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type {
   CreateEventScheduleRequest,
   EventScheduleFormState,
@@ -274,7 +273,6 @@ import type {
 } from '@/types/eventSchedule'
 import type { EventScheduleTemplateListItem } from '@/types/eventScheduleTemplate'
 import type { PersonSummary } from '@/types/people'
-import { Permissions } from '@/utils/permissions'
 import {
   getActiveScheduleNowIndicator,
   getScheduleItemHeightStyle,
@@ -353,11 +351,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageSchedule(): boolean {
-      return this.authStore.hasPermission(Permissions.EventSchedulesManage)
+      return true
     },
     eventId(): number {
       return Number(this.$route.params.eventId)

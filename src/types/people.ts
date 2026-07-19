@@ -1,4 +1,4 @@
-import type { ApiResponse } from '@/types/auth'
+import type { ApiResponse } from '@/types/api'
 
 export type PersonSummary = {
   id: number
@@ -27,7 +27,6 @@ export type PersonListItem = {
   ministryCount: number
   skillCount: number
   managedMinistryCount: number
-  hasSystemUser: boolean
 }
 
 export type PersonRelatedMinistry = {
@@ -41,11 +40,6 @@ export type PersonRelatedSkill = {
 }
 
 export type PersonManagedMinistry = {
-  id: number
-  name: string
-}
-
-export type PersonRelatedRole = {
   id: number
   name: string
 }
@@ -64,16 +58,9 @@ export type PersonDetails = {
   mobilePhone: string | null
   notes: string | null
   isActive: boolean
-  hasSystemUser: boolean
-  hasSystemAccess: boolean
-  isAdmin: boolean
-  systemUserEmail: string | null
-  systemLastLoginAt: string | null
-  hasPassword: boolean
   ministries: PersonRelatedMinistry[]
   skills: PersonRelatedSkill[]
   managedMinistries: PersonManagedMinistry[]
-  roles: PersonRelatedRole[]
   createdAt: string
   createdBy: number | null
   updatedAt: string | null
@@ -91,10 +78,6 @@ export type CreatePersonRequest = {
   notes: string | null
   ministryIds: number[]
   skillIds: number[]
-  hasSystemAccess: boolean
-  isAdmin: boolean
-  roleIds: number[]
-  password?: string | null
 }
 
 export type UpdatePersonRequest = CreatePersonRequest
@@ -107,11 +90,6 @@ export type UpdateSelfPersonRequest = {
   notes: string | null
   ministryIds: number[]
   skillIds: number[]
-}
-
-export type ChangeOwnPasswordRequest = {
-  currentPassword: string
-  newPassword: string
 }
 
 export type Ministry = {

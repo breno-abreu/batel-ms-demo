@@ -202,9 +202,7 @@ import AppTooltip from '@/components/feedback/AppTooltip.vue'
 import { confirmDialogService } from '@/services/confirmDialogService'
 import { skillService } from '@/services/skillService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type { CreateSkillRequest, Skill, UpdateSkillRequest } from '@/types/people'
-import { Permissions } from '@/utils/permissions'
 
 const SKILL_NAME_MAX_LENGTH = 120
 
@@ -247,11 +245,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageSkills(): boolean {
-      return this.authStore.hasPermission(Permissions.SkillsManage)
+      return true
     },
     nameFieldDescribedBy(): string {
       return this.nameError

@@ -484,14 +484,12 @@ import {
   usefulLinkGroupService
 } from '@/services/usefulLinkGroupService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import { unsavedChangesStore } from '@/stores/unsavedChangesStore'
 import type {
   CreateUsefulLinkGroupRequest,
   UsefulLinkGroup,
   UsefulLinkGroupVisibilityFilter
 } from '@/types/usefulLinkGroup'
-import { Permissions } from '@/utils/permissions'
 
 const USEFUL_LINK_GROUP_NAME_MAX_LENGTH = 120
 const USEFUL_LINK_GROUP_DESCRIPTION_MAX_LENGTH = 2000
@@ -555,14 +553,11 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageAllGroups(): boolean {
-      return this.authStore.hasPermission(Permissions.UsefulLinkGroupsManage)
+      return true
     },
     canManageOwnGroups(): boolean {
-      return this.authStore.hasPermission(Permissions.UsefulLinkGroupsManageOwn)
+      return true
     },
     canCreateGroup(): boolean {
       return this.canManageAllGroups || this.canManageOwnGroups

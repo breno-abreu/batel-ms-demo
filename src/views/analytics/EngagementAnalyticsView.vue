@@ -396,7 +396,6 @@ import type {
   HeatmapMonth
 } from '@/types/analytics'
 import type { Ministry } from '@/types/people'
-import { HttpError } from '@/services/httpClient'
 
 Chart.register(
   BarController,
@@ -798,7 +797,7 @@ export default defineComponent({
           this.ministryId = this.ministries[0].id
         }
       } catch (error) {
-        const message = error instanceof HttpError
+        const message = error instanceof Error
           ? error.message
           : 'Não foi possível carregar os ministérios.'
         toastService.error(message)
@@ -844,7 +843,7 @@ export default defineComponent({
         }
       } catch (error) {
         console.error('[Engajamento] Falha ao carregar pessoas sem escala', error)
-        const message = error instanceof HttpError
+        const message = error instanceof Error
           ? error.message
           : 'Não foi possível atualizar as pessoas sem escala.'
         toastService.error(message)
@@ -883,7 +882,7 @@ export default defineComponent({
       } catch (error) {
         console.error('[Engajamento] Falha ao carregar análises', error)
         this.analytics = null
-        const message = error instanceof HttpError
+        const message = error instanceof Error
           ? error.message
           : 'Não foi possível carregar as análises de engajamento.'
         toastService.error(message)

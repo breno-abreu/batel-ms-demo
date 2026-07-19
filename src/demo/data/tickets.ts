@@ -11,7 +11,7 @@ const DEMO_TICKET_COUNT = 110
 
 const titleTemplates = [
   'Não consigo abrir a escala', 'Erro ao salvar música', 'Sugestão de filtro',
-  'Problema no login', 'Dúvida sobre permissões', 'Falha ao compartilhar pasta',
+  'Falha ao abrir a agenda', 'Dúvida sobre cadastros', 'Falha ao compartilhar pasta',
   'Página em branco na agenda', 'Solicitar acesso ao cadastro', 'Bug no favoritar',
   'Ajuste no relatório', 'Lentidão na listagem', 'Erro 404 ao editar',
   'Melhoria no modal', 'Problema com data', 'Exportação PNG falhou',

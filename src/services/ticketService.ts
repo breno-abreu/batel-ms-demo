@@ -1,117 +1,33 @@
 import { demoTicketApi } from '@/demo/api/ticketDemoApi'
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
-import { httpClient } from '@/services/httpClient'
-import type { ApiResponse } from '@/types/auth'
-import type {
-  AdminUpdateTicketRequest,
-  CreateTicketRequest,
-  TicketAdminListResponse,
-  TicketAdminResponse,
-  TicketListQuery,
-  TicketListResponse,
-  TicketResponse,
-  UpdateTicketRequest
-} from '@/types/tickets'
-
-function buildListQueryString(query: TicketListQuery = {}): string {
-  const params = new URLSearchParams()
-  const search = query.search?.trim()
-
-  if (search) {
-    params.set('search', search)
-  }
-
-  if (query.ticketTypeId) {
-    params.set('ticketTypeId', String(query.ticketTypeId))
-  }
-
-  if (query.ticketStatusId) {
-    params.set('ticketStatusId', String(query.ticketStatusId))
-  }
-
-  if (query.ticketPriorityId) {
-    params.set('ticketPriorityId', String(query.ticketPriorityId))
-  }
-
-  params.set('page', String(query.page ?? 1))
-  params.set('pageSize', String(query.pageSize ?? 20))
-
-  return params.toString()
-}
+import { withDemoMutation } from '@/demo/demoRequest'
+import type { AdminUpdateTicketRequest, CreateTicketRequest, TicketListQuery, UpdateTicketRequest } from '@/types/tickets'
 
 export const ticketService = {
   listMine(query: TicketListQuery = {}) {
-    if (IS_DEMO_MODE) {
-      return demoTicketApi.listMine(query)
-    }
-
-    const queryString = buildListQueryString(query)
-
-    return httpClient.get<TicketListResponse>(`/api/tickets?${queryString}`)
+    return demoTicketApi.listMine(query)
   },
 
-  create(payload: CreateTicketRequest) {
-    if (IS_DEMO_MODE) {
-      return demoTicketApi.create()
-    }
-
-    return httpClient.post<TicketResponse>(
-      '/api/tickets',
-      payload,
-      { skipErrorRedirect: true }
-    )
+  create(_payload: CreateTicketRequest) {
+    return withDemoMutation(() => demoTicketApi.create())
   },
 
-  update(id: number, payload: UpdateTicketRequest) {
-    if (IS_DEMO_MODE) {
-      return demoTicketApi.update(id)
-    }
-
-    return httpClient.put<TicketResponse>(
-      `/api/tickets/${id}`,
-      payload,
-      { skipErrorRedirect: true }
-    )
+  update(id: number, _payload: UpdateTicketRequest) {
+    return withDemoMutation(() => demoTicketApi.update(id))
   },
 
-  remove(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoTicketApi.remove()
-    }
-
-    return httpClient.delete<ApiResponse<null>>(
-      `/api/tickets/${id}`,
-      { skipErrorRedirect: true }
-    )
+  remove(_id: number) {
+    return withDemoMutation(() => demoTicketApi.remove())
   },
 
   listForAdmin(query: TicketListQuery = {}) {
-    if (IS_DEMO_MODE) {
-      return demoTicketApi.listForAdmin(query)
-    }
-
-    const queryString = buildListQueryString(query)
-
-    return httpClient.get<TicketAdminListResponse>(`/api/admin/tickets?${queryString}`)
+    return demoTicketApi.listForAdmin(query)
   },
 
   getForAdmin(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoTicketApi.getForAdmin(id)
-    }
-
-    return httpClient.get<TicketAdminResponse>(`/api/admin/tickets/${id}`)
+    return demoTicketApi.getForAdmin(id)
   },
 
-  updateByAdmin(id: number, payload: AdminUpdateTicketRequest) {
-    if (IS_DEMO_MODE) {
-      return demoTicketApi.updateByAdmin(id)
-    }
-
-    return httpClient.put<TicketAdminResponse>(
-      `/api/admin/tickets/${id}`,
-      payload,
-      { skipErrorRedirect: true }
-    )
+  updateByAdmin(id: number, _payload: AdminUpdateTicketRequest) {
+    return withDemoMutation(() => demoTicketApi.updateByAdmin(id))
   }
 }

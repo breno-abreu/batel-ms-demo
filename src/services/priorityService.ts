@@ -1,68 +1,24 @@
 import { demoPriorityApi } from '@/demo/api/catalogDemoApi'
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
-import { httpClient } from '@/services/httpClient'
-import type { ApiResponse } from '@/types/auth'
-import type {
-  CreatePriorityRequest,
-  PriorityListResponse,
-  PriorityResponse,
-  ReorderPrioritiesRequest,
-  UpdatePriorityRequest
-} from '@/types/tickets'
+import { withDemoMutation } from '@/demo/demoRequest'
+import type { CreatePriorityRequest, ReorderPrioritiesRequest, UpdatePriorityRequest } from '@/types/tickets'
 
 export const priorityService = {
   list() {
-    if (IS_DEMO_MODE) {
-      return demoPriorityApi.list()
-    }
-
-    return httpClient.get<PriorityListResponse>('/api/priorities')
+    return demoPriorityApi.list()
+  },
+  create(_payload: CreatePriorityRequest) {
+    return withDemoMutation(() => demoPriorityApi.create())
   },
 
-  create(payload: CreatePriorityRequest) {
-    if (IS_DEMO_MODE) {
-      return demoPriorityApi.create()
-    }
-
-    return httpClient.post<PriorityResponse>(
-      '/api/priorities',
-      payload,
-      { skipErrorRedirect: true }
-    )
+  update(id: number, _payload: UpdatePriorityRequest) {
+    return withDemoMutation(() => demoPriorityApi.update(id))
   },
 
-  update(id: number, payload: UpdatePriorityRequest) {
-    if (IS_DEMO_MODE) {
-      return demoPriorityApi.update(id)
-    }
-
-    return httpClient.put<PriorityResponse>(
-      `/api/priorities/${id}`,
-      payload,
-      { skipErrorRedirect: true }
-    )
+  reorder(_payload: ReorderPrioritiesRequest) {
+    return withDemoMutation(() => demoPriorityApi.reorder())
   },
 
-  reorder(payload: ReorderPrioritiesRequest) {
-    if (IS_DEMO_MODE) {
-      return demoPriorityApi.reorder()
-    }
-
-    return httpClient.put<PriorityListResponse>(
-      '/api/priorities/reorder',
-      payload,
-      { skipErrorRedirect: true }
-    )
-  },
-
-  remove(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoPriorityApi.remove()
-    }
-
-    return httpClient.delete<ApiResponse<null>>(
-      `/api/priorities/${id}`,
-      { skipErrorRedirect: true }
-    )
+  remove(_id: number) {
+    return withDemoMutation(() => demoPriorityApi.remove())
   }
 }

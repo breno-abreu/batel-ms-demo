@@ -348,14 +348,12 @@ import { confirmDialogService } from '@/services/confirmDialogService'
 import { ministryService } from '@/services/ministryService'
 import { personService } from '@/services/personService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type {
   CreateMinistryRequest,
   Ministry,
   PersonSummary,
   UpdateMinistryRequest
 } from '@/types/people'
-import { Permissions } from '@/utils/permissions'
 
 const MINISTRY_NAME_MAX_LENGTH = 120
 const MINISTRY_DESCRIPTION_MAX_LENGTH = 500
@@ -413,11 +411,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageMinistries(): boolean {
-      return this.authStore.hasPermission(Permissions.MinistriesManage)
+      return true
     },
     nameFieldDescribedBy(): string {
       return this.nameError

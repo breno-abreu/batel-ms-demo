@@ -2,14 +2,11 @@ import 'vue-router'
 
 declare module 'vue-router' {
   interface RouteMeta {
-    requiresAuth?: boolean
-    guestOnly?: boolean
-    requiresAdmin?: boolean
+    /** Rotas do app com sidebar/navbar (não relacionado a autenticação). */
+    appShell?: boolean
     publicShare?: boolean
     hideNavbar?: boolean
     selfProfile?: boolean
-    requiredPermissions?: string[]
-    requiredAnyPermissions?: string[]
   }
 }
 

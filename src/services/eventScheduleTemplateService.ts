@@ -1,65 +1,24 @@
 import { demoEventScheduleTemplateApi } from '@/demo/api/eventDemoApi'
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
-import { httpClient } from '@/services/httpClient'
-import type { ApiResponse } from '@/types/auth'
-import type {
-  CreateEventScheduleTemplateFromEventRequest,
-  EventSchedulePageFromTemplateResponse,
-  EventScheduleTemplateDetailsResponse,
-  EventScheduleTemplateListResponse
-} from '@/types/eventScheduleTemplate'
+import { withDemoMutation } from '@/demo/demoRequest'
+import type { CreateEventScheduleTemplateFromEventRequest } from '@/types/eventScheduleTemplate'
 
 export const eventScheduleTemplateService = {
   list() {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleTemplateApi.list()
-    }
-
-    return httpClient.get<EventScheduleTemplateListResponse>('/api/event-schedule-templates')
+    return demoEventScheduleTemplateApi.list()
   },
-
   getById(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleTemplateApi.getById(id)
-    }
-
-    return httpClient.get<EventScheduleTemplateDetailsResponse>(
-      `/api/event-schedule-templates/${id}`
-    )
+    return demoEventScheduleTemplateApi.getById(id)
   },
 
-  createFromEvent(eventId: number, payload: CreateEventScheduleTemplateFromEventRequest) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleTemplateApi.createFromEvent()
-    }
-
-    return httpClient.post<EventScheduleTemplateDetailsResponse>(
-      `/api/event-schedule-templates/from-event/${eventId}`,
-      payload,
-      { skipErrorRedirect: true }
-    )
+  createFromEvent(_eventId: number, _payload: CreateEventScheduleTemplateFromEventRequest) {
+    return withDemoMutation(() => demoEventScheduleTemplateApi.createFromEvent())
   },
 
   applyToEvent(templateId: number, eventId: number) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleTemplateApi.applyToEvent(templateId, eventId)
-    }
-
-    return httpClient.post<EventSchedulePageFromTemplateResponse>(
-      `/api/event-schedule-templates/${templateId}/apply/${eventId}`,
-      undefined,
-      { skipErrorRedirect: true }
-    )
+    return withDemoMutation(() => demoEventScheduleTemplateApi.applyToEvent(templateId, eventId))
   },
 
-  remove(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleTemplateApi.remove()
-    }
-
-    return httpClient.delete<ApiResponse<null>>(
-      `/api/event-schedule-templates/${id}`,
-      { skipErrorRedirect: true }
-    )
+  remove(_id: number) {
+    return withDemoMutation(() => demoEventScheduleTemplateApi.remove())
   }
 }

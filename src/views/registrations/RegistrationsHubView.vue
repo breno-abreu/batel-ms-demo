@@ -42,7 +42,6 @@ import { defineComponent } from 'vue'
 import { RouterLink } from 'vue-router'
 import { ArrowRightIcon, LibraryIcon } from '@lucide/vue'
 import { getAccessibleRegistrationNavItems } from '@/navigation/registrationNavItems'
-import { useAuthStore } from '@/stores/authStore'
 
 export default defineComponent({
   name: 'RegistrationsHubView',
@@ -52,11 +51,8 @@ export default defineComponent({
     RouterLink
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     items() {
-      return getAccessibleRegistrationNavItems(this.authStore)
+      return getAccessibleRegistrationNavItems()
     }
   }
 })

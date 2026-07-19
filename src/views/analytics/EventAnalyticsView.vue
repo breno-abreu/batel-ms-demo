@@ -190,7 +190,6 @@ import type {
   EventAnalytics,
   EventAnalyticsSeries
 } from '@/types/analytics'
-import { HttpError } from '@/services/httpClient'
 
 Chart.register(
   CategoryScale,
@@ -415,7 +414,7 @@ export default defineComponent({
       } catch (error) {
         console.error('[Eventos] Falha ao carregar análises', error)
         this.analytics = null
-        const message = error instanceof HttpError
+        const message = error instanceof Error
           ? error.message
           : 'Não foi possível carregar as análises de eventos.'
         toastService.error(message)

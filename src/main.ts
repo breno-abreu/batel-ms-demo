@@ -8,10 +8,8 @@ import '@/style.css'
 import App from '@/App.vue'
 import { unsavedChangesDirective } from '@/directives/unsavedChanges'
 import router from '@/router'
-import { setupAuthGuard } from '@/router/authGuard'
 import { setupUnsavedChangesGuard } from '@/router/unsavedChangesGuard'
 import { applyUiZoom, setupAppFrameHeightSync } from '@/services/uiZoomStorage'
-import { useAuthStore } from '@/stores/authStore'
 import { unsavedChangesStore } from '@/stores/unsavedChangesStore'
 
 function initializeUiZoom(): void {
@@ -39,7 +37,7 @@ const BatelPreset = definePreset(Lara, {
   }
 })
 
-async function bootstrap(): Promise<void> {
+function bootstrap(): void {
   const app = createApp(App)
   const pinia = createPinia()
 
@@ -50,7 +48,6 @@ async function bootstrap(): Promise<void> {
   app.directive('unsaved-changes', unsavedChangesDirective)
   app.use(pinia)
   app.use(router)
-  setupAuthGuard(router)
   setupUnsavedChangesGuard(router)
   unsavedChangesStore.setupBeforeUnload()
   app.use(PrimeVue, {
@@ -59,11 +56,7 @@ async function bootstrap(): Promise<void> {
     }
   })
 
-  const authStore = useAuthStore(pinia)
-  authStore.initializeFromStorage()
-  await authStore.ensureValidSession()
-
   app.mount('#app')
 }
 
-void bootstrap()
+bootstrap()

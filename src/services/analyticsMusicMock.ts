@@ -1,4 +1,3 @@
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
 import type {
   AnalyticsAbsencePeriod,
   AnalyticsTimeRange,
@@ -12,9 +11,6 @@ import type {
   MusicInterval,
   MusicSongRanking
 } from '@/types/analytics'
-
-/** Equivale a IS_DEMO_MODE — não manter true fixo bloqueando a API. */
-export const USE_MUSIC_ANALYTICS_MOCK = IS_DEMO_MODE
 
 type MockMusicQuery = {
   range: AnalyticsTimeRange

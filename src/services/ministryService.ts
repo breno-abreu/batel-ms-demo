@@ -1,78 +1,28 @@
 import { demoMinistryApi } from '@/demo/api/personDemoApi'
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
-import { httpClient } from '@/services/httpClient'
-import type { ApiResponse } from '@/types/auth'
-import type {
-  CreateMinistryRequest,
-  MinistryListResponse,
-  MinistryResponse,
-  UpdateMinistryRequest
-} from '@/types/people'
-import type { MinistryMembersForScheduleResponse } from '@/types/teamSchedules'
+import { withDemoMutation } from '@/demo/demoRequest'
+import type { CreateMinistryRequest, UpdateMinistryRequest } from '@/types/people'
 
 export const ministryService = {
   list() {
-    if (IS_DEMO_MODE) {
-      return demoMinistryApi.list()
-    }
-
-    return httpClient.get<MinistryListResponse>('/api/ministries')
+    return demoMinistryApi.list()
+  },
+  create(_payload: CreateMinistryRequest) {
+    return withDemoMutation(() => demoMinistryApi.create())
   },
 
-  create(payload: CreateMinistryRequest) {
-    if (IS_DEMO_MODE) {
-      return demoMinistryApi.create()
-    }
-
-    return httpClient.post<MinistryResponse>(
-      '/api/ministries',
-      payload,
-      { skipErrorRedirect: true }
-    )
-  },
-
-  update(id: number, payload: UpdateMinistryRequest) {
-    if (IS_DEMO_MODE) {
-      return demoMinistryApi.update(id)
-    }
-
-    return httpClient.put<MinistryResponse>(
-      `/api/ministries/${id}`,
-      payload,
-      { skipErrorRedirect: true }
-    )
+  update(id: number, _payload: UpdateMinistryRequest) {
+    return withDemoMutation(() => demoMinistryApi.update(id))
   },
 
   toggleActive(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoMinistryApi.toggleActive(id)
-    }
-
-    return httpClient.put<MinistryResponse>(
-      `/api/ministries/${id}/toggle-active`,
-      undefined,
-      { skipErrorRedirect: true }
-    )
+    return withDemoMutation(() => demoMinistryApi.toggleActive(id))
   },
 
-  remove(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoMinistryApi.remove()
-    }
-
-    return httpClient.delete<ApiResponse<null>>(
-      `/api/ministries/${id}`,
-      { skipErrorRedirect: true }
-    )
+  remove(_id: number) {
+    return withDemoMutation(() => demoMinistryApi.remove())
   },
 
   listMembersForSchedule(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoMinistryApi.listMembersForSchedule(id)
-    }
-
-    return httpClient.get<MinistryMembersForScheduleResponse>(
-      `/api/ministries/${id}/members-for-schedule`
-    )
+    return demoMinistryApi.listMembersForSchedule(id)
   }
 }

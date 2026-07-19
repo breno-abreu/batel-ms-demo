@@ -65,7 +65,6 @@ import {
   getSidebarNavGroups,
   type SidebarNavItem
 } from '@/navigation/sidebarNavItems'
-import { useAuthStore } from '@/stores/authStore'
 
 export default defineComponent({
   name: 'AppSidebar',
@@ -79,11 +78,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     navigationGroups() {
-      return getSidebarNavGroups(this.authStore)
+      return getSidebarNavGroups()
     }
   },
   watch: {

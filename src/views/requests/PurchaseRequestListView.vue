@@ -697,7 +697,6 @@ import { priorityService } from '@/services/priorityService'
 import { purchaseRequestService } from '@/services/purchaseRequestService'
 import { purchaseRequestStatusService } from '@/services/purchaseRequestStatusService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type { Ministry, PersonSummary } from '@/types/people'
 import type {
   CreatePurchaseRequestPayload,
@@ -707,7 +706,6 @@ import type {
 } from '@/types/requests'
 import type { Priority } from '@/types/tickets'
 import { formatCurrencyBrl } from '@/utils/currencyInput'
-import { Permissions } from '@/utils/permissions'
 import {
   getPurchaseRequestStatusLifecycleClass,
   getPurchaseRequestStatusLifecycleFlag
@@ -816,16 +814,11 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageAllPurchaseRequests(): boolean {
-      return this.authStore.hasPermission(Permissions.PurchaseRequestsView)
-        || this.authStore.hasPermission(Permissions.PurchaseRequestsManageAll)
+      return true
     },
     canManageOwnPurchaseRequests(): boolean {
-      return this.authStore.hasPermission(Permissions.PurchaseRequestsManageOwn)
-        || this.authStore.hasPermission(Permissions.PurchaseRequestsViewOwn)
+      return true
     },
     canCreatePurchaseRequest(): boolean {
       return this.canManageAllPurchaseRequests || this.canManageOwnPurchaseRequests
@@ -906,13 +899,8 @@ export default defineComponent({
     this.clearSearchDebounce()
   },
   methods: {
-    canManagePurchaseRequest(item: PurchaseRequestListItem): boolean {
-      if (this.canManageAllPurchaseRequests) {
-        return true
-      }
-
-      return this.canManageOwnPurchaseRequests
-        && item.createdByUserId === this.authStore.user?.id
+    canManagePurchaseRequest(_item: PurchaseRequestListItem): boolean {
+      return true
     },
 
     getStatusBadgeClass(item: PurchaseRequestListItem): string {

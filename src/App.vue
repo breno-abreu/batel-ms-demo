@@ -38,7 +38,6 @@ import AppNavbar from '@/components/navbar/AppNavbar.vue'
 import AppSidebar from '@/components/navbar/AppSidebar.vue'
 import AppToastContainer from '@/components/feedback/AppToastContainer.vue'
 import MobileUnsupportedView from '@/views/errors/MobileUnsupportedView.vue'
-import { useAuthStore } from '@/stores/authStore'
 
 const MOBILE_VIEWPORT_QUERY = '(max-width: 720px)'
 
@@ -62,9 +61,6 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     isPublicShareRoute(): boolean {
       return this.$route.matched.some((record) => record.meta.publicShare === true)
     },
@@ -72,28 +68,25 @@ export default defineComponent({
       return this.isNarrowViewport && !this.isPublicShareRoute
     },
     showSidebar(): boolean {
-      if (this.isMobileUnsupported || !this.authStore.isAuthenticated) {
+      if (this.isMobileUnsupported) {
         return false
       }
 
-      return this.$route.matched.some((record) => record.meta.requiresAuth === true)
+      return this.$route.matched.some((record) => record.meta.appShell === true)
     },
     showNavbar(): boolean {
       if (this.isMobileUnsupported) {
         return false
       }
 
-      return !this.$route.matched.some(
-        (record) => record.meta.guestOnly === true || record.meta.hideNavbar === true
-      )
+      return !this.$route.matched.some((record) => record.meta.hideNavbar === true)
     },
     showBirthdayGreeting(): boolean {
-      if (this.isMobileUnsupported || !this.authStore.isAuthenticated) {
+      if (this.isMobileUnsupported) {
         return false
       }
 
-      return this.$route.matched.some((record) => record.meta.requiresAuth === true)
-        && !this.$route.matched.some((record) => record.meta.guestOnly === true)
+      return this.$route.matched.some((record) => record.meta.appShell === true)
     }
   },
   mounted() {

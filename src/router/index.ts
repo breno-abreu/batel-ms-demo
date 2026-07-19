@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { Permissions } from '@/utils/permissions'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,7 +7,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('@/views/HomeView.vue'),
-      meta: { requiresAuth: true }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire',
@@ -18,43 +17,43 @@ const router = createRouter({
       path: '/repertoire/list',
       name: 'repertoire-list',
       component: () => import('@/views/repertoire/RepertoireListView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RepertoireView] }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire/details/:id',
       name: 'repertoire-details',
       component: () => import('@/views/repertoire/RepertoireDetailsView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RepertoireView] }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire/groups/:id',
       name: 'repertoire-group-details',
       component: () => import('@/views/repertoire/RepertoireGroupDetailsView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RepertoireGroupsView] }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire/groups',
       name: 'repertoire-groups',
       component: () => import('@/views/repertoire/RepertoireGroupView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RepertoireGroupsView] }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire/difficulty-levels',
       name: 'repertoire-difficulty-levels',
       component: () => import('@/views/repertoire/DifficultyLevelView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RepertoireMetadataManage] }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire/popularity-levels',
       name: 'repertoire-popularity-levels',
       component: () => import('@/views/repertoire/PopularityLevelView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RepertoireMetadataManage] }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire/musical-themes',
       name: 'repertoire-musical-themes',
       component: () => import('@/views/repertoire/MusicalThemeView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RepertoireMetadataManage] }
+      meta: { appShell: true }
     },
     {
       path: '/people',
@@ -64,107 +63,94 @@ const router = createRouter({
       path: '/people/birthdays',
       name: 'people-birthdays',
       component: () => import('@/views/people/BirthdayListView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.BirthdaysView] }
+      meta: { appShell: true }
     },
     {
       path: '/people/list',
       name: 'people-list',
       component: () => import('@/views/people/PersonListView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.PeopleView] }
+      meta: { appShell: true }
     },
     {
       path: '/people/details/:id',
       name: 'people-details',
       component: () => import('@/views/people/PersonDetailsView.vue'),
-      meta: {
-        requiresAuth: true,
-        requiredAnyPermissions: [Permissions.PeopleView, Permissions.ProfileViewOwn]
-      }
+      meta: { appShell: true }
     },
     {
       path: '/account/profile',
       name: 'account-profile',
       component: () => import('@/views/people/PersonDetailsView.vue'),
       meta: {
-        requiresAuth: true,
-        selfProfile: true,
-        requiredPermissions: [Permissions.ProfileViewOwn]
+        appShell: true,
+        selfProfile: true
       }
     },
     {
       path: '/people/ministries',
       name: 'people-ministries',
       component: () => import('@/views/people/MinistryView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.MinistriesView] }
+      meta: { appShell: true }
     },
     {
       path: '/people/skills',
       name: 'people-skills',
       component: () => import('@/views/people/SkillView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.SkillsView] }
+      meta: { appShell: true }
     },
     {
       path: '/support',
       name: 'support-tickets',
       component: () => import('@/views/tickets/TicketListView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.SupportTicketsViewOwn] }
+      meta: { appShell: true }
     },
     {
       path: '/support/admin',
       name: 'support-admin-tickets',
       component: () => import('@/views/tickets/TicketAdminListView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.SupportTicketsManageAll] }
+      meta: { appShell: true }
     },
     {
       path: '/tickets/statuses',
       name: 'ticket-statuses',
       component: () => import('@/views/tickets/TicketStatusView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RegistrationsManage] }
+      meta: { appShell: true }
     },
     {
       path: '/tickets/types',
       name: 'ticket-types',
       component: () => import('@/views/tickets/TicketTypeView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RegistrationsManage] }
+      meta: { appShell: true }
     },
     {
       path: '/priorities',
       name: 'priorities',
       component: () => import('@/views/tickets/PriorityView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RegistrationsManage] }
+      meta: { appShell: true }
     },
     {
       path: '/requests/task-statuses',
       name: 'task-statuses',
       component: () => import('@/views/requests/WorkTaskStatusView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RegistrationsManage] }
+      meta: { appShell: true }
     },
     {
       path: '/requests/purchase-request-statuses',
       name: 'purchase-request-statuses',
       component: () => import('@/views/requests/PurchaseRequestStatusView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.RegistrationsManage] }
+      meta: { appShell: true }
     },
     {
       path: '/requests/purchases',
       name: 'purchase-requests',
       component: () => import('@/views/requests/PurchaseRequestListView.vue'),
-      meta: {
-        requiresAuth: true,
-        requiredAnyPermissions: [
-          Permissions.PurchaseRequestsViewOwn,
-          Permissions.PurchaseRequestsView
-        ]
-      }
+      meta: { appShell: true }
     },
     {
       path: '/requests/tasks',
       name: 'tasks',
       component: () => import('@/views/requests/TaskListView.vue'),
-      meta: {
-        requiresAuth: true,
-        requiredAnyPermissions: [Permissions.TasksViewOwn, Permissions.TasksView]
-      }
+      meta: { appShell: true }
     },
     {
       path: '/events',
@@ -174,13 +160,13 @@ const router = createRouter({
       path: '/events/agenda',
       name: 'events-agenda',
       component: () => import('@/views/events/EventAgendaView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.EventsAgendaView] }
+      meta: { appShell: true }
     },
     {
       path: '/events/types',
       name: 'event-types',
       component: () => import('@/views/events/EventTypeView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.EventTypesManage] }
+      meta: { appShell: true }
     },
     {
       path: '/useful-links',
@@ -190,72 +176,55 @@ const router = createRouter({
       path: '/useful-links/list',
       name: 'useful-link-list',
       component: () => import('@/views/usefulLinks/UsefulLinkListView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.UsefulLinksView] }
+      meta: { appShell: true }
     },
     {
       path: '/useful-links/details/:id',
       name: 'useful-link-details',
       component: () => import('@/views/usefulLinks/UsefulLinkDetailsView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.UsefulLinksView] }
+      meta: { appShell: true }
     },
     {
       path: '/useful-links/types',
       name: 'useful-link-types',
       component: () => import('@/views/usefulLinks/UsefulLinkTypeView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.UsefulLinkTypesManage] }
+      meta: { appShell: true }
     },
     {
       path: '/useful-links/groups/:id',
       name: 'useful-link-groups-details',
       component: () => import('@/views/usefulLinks/UsefulLinkGroupDetailsView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.UsefulLinkGroupsView] }
+      meta: { appShell: true }
     },
     {
       path: '/useful-links/groups',
       name: 'useful-link-groups',
       component: () => import('@/views/usefulLinks/UsefulLinkGroupView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.UsefulLinkGroupsView] }
+      meta: { appShell: true }
     },
     {
       path: '/events/:eventId/cronograma',
       name: 'events-schedule',
       component: () => import('@/views/events/EventScheduleView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.EventsAgendaView] }
+      meta: { appShell: true }
     },
     {
       path: '/events/schedules',
       name: 'events-schedules',
       component: () => import('@/views/events/MonthlyTeamScheduleView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.TeamSchedulesView] }
+      meta: { appShell: true }
     },
     {
       path: '/events/schedules/:ministryId/:year/:month',
       name: 'events-schedules-details',
       component: () => import('@/views/events/MonthlyTeamScheduleDetailsView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.TeamSchedulesView] }
+      meta: { appShell: true }
     },
     {
       path: '/cadastros',
       name: 'registrations-hub',
       component: () => import('@/views/registrations/RegistrationsHubView.vue'),
-      meta: {
-        requiresAuth: true,
-        requiredAnyPermissions: [
-          Permissions.PeopleView,
-          Permissions.MinistriesView,
-          Permissions.SkillsView,
-          Permissions.RepertoireMetadataManage,
-          Permissions.UsefulLinkTypesManage,
-          Permissions.EventTypesManage,
-          Permissions.RegistrationsManage
-        ]
-      }
-    },
-    {
-      path: '/admin/permissoes',
-      name: 'permissions-admin',
-      component: () => import('@/views/admin/PermissionsAdminView.vue'),
-      meta: { requiresAuth: true, requiresAdmin: true }
+      meta: { appShell: true }
     },
     {
       path: '/analytics',
@@ -265,31 +234,31 @@ const router = createRouter({
       path: '/analytics/engagement',
       name: 'analytics-engagement',
       component: () => import('@/views/analytics/EngagementAnalyticsView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.AnalyticsView] }
+      meta: { appShell: true }
     },
     {
       path: '/analytics/events',
       name: 'analytics-events',
       component: () => import('@/views/analytics/EventAnalyticsView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.AnalyticsView] }
+      meta: { appShell: true }
     },
     {
       path: '/analytics/music',
       name: 'analytics-music',
       component: () => import('@/views/analytics/MusicAnalyticsView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.AnalyticsView] }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire/song-suggestions',
       name: 'song-suggestion-list',
       component: () => import('@/views/repertoire/SongSuggestionListView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.SongSuggestionsViewOwn] }
+      meta: { appShell: true }
     },
     {
       path: '/repertoire/song-suggestions/admin',
       name: 'song-suggestion-admin-list',
       component: () => import('@/views/repertoire/SongSuggestionAdminListView.vue'),
-      meta: { requiresAuth: true, requiredPermissions: [Permissions.SongSuggestionsReview] }
+      meta: { appShell: true }
     },
     {
       path: '/public/repertorio-pasta/:shareHash',
@@ -351,23 +320,6 @@ const router = createRouter({
     {
       path: '/public/:pathMatch(.*)*',
       redirect: { name: 'public-not-found' }
-    },
-    {
-      path: '/auth/login',
-      name: 'login',
-      component: () => import('@/views/auth/LoginView.vue'),
-      meta: { guestOnly: true }
-    },
-    {
-      path: '/auth/register',
-      name: 'register',
-      component: () => import('@/views/auth/RegisterView.vue'),
-      meta: { guestOnly: true }
-    },
-    {
-      path: '/401',
-      name: 'unauthorized',
-      component: () => import('@/views/errors/UnauthorizedView.vue')
     },
     {
       path: '/404',

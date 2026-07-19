@@ -457,7 +457,6 @@ import type {
   MusicAnalytics,
   MusicInterval
 } from '@/types/analytics'
-import { HttpError } from '@/services/httpClient'
 
 Chart.register(
   BarController,
@@ -904,7 +903,7 @@ export default defineComponent({
         }
       } catch (error) {
         console.error('[Músicas] Falha ao atualizar músicas esquecidas', error)
-        const message = error instanceof HttpError
+        const message = error instanceof Error
           ? error.message
           : 'Não foi possível atualizar as músicas esquecidas.'
         toastService.error(message)
@@ -943,7 +942,7 @@ export default defineComponent({
       } catch (error) {
         console.error('[Músicas] Falha ao carregar análises', error)
         this.analytics = null
-        const message = error instanceof HttpError
+        const message = error instanceof Error
           ? error.message
           : 'Não foi possível carregar as análises de músicas.'
         toastService.error(message)

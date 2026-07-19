@@ -1,15 +1,6 @@
 import { demoEventScheduleApi } from '@/demo/api/eventDemoApi'
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
-import { httpClient } from '@/services/httpClient'
-import type { ApiResponse } from '@/types/auth'
-import type {
-  CreateEventScheduleRequest,
-  EventScheduleItemResponse,
-  EventSchedulePageResponse,
-  EventScheduleShareLinkResponse,
-  PublicEventSchedulePageResponse,
-  UpdateEventScheduleRequest
-} from '@/types/eventSchedule'
+import { withDemoMutation } from '@/demo/demoRequest'
+import type { CreateEventScheduleRequest, UpdateEventScheduleRequest } from '@/types/eventSchedule'
 
 const PUBLIC_EVENT_SCHEDULE_SHARE_ROUTE = '/public/cronogramas'
 
@@ -23,68 +14,26 @@ export function buildPublicEventScheduleShareUrl(shareHash: string): string {
 
 export const eventScheduleService = {
   listByEvent(eventId: number) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleApi.listByEvent(eventId)
-    }
-
-    return httpClient.get<EventSchedulePageResponse>(`/api/events/${eventId}/schedule`)
+    return demoEventScheduleApi.listByEvent(eventId)
   },
 
-  create(eventId: number, payload: CreateEventScheduleRequest) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleApi.create(eventId)
-    }
-
-    return httpClient.post<EventScheduleItemResponse>(
-      `/api/events/${eventId}/schedule`,
-      payload,
-      { skipErrorRedirect: true }
-    )
+  create(eventId: number, _payload: CreateEventScheduleRequest) {
+    return withDemoMutation(() => demoEventScheduleApi.create(eventId))
   },
 
-  update(id: number, payload: UpdateEventScheduleRequest) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleApi.update(id)
-    }
-
-    return httpClient.put<EventScheduleItemResponse>(
-      `/api/event-schedule/${id}`,
-      payload,
-      { skipErrorRedirect: true }
-    )
+  update(id: number, _payload: UpdateEventScheduleRequest) {
+    return withDemoMutation(() => demoEventScheduleApi.update(id))
   },
 
-  remove(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleApi.remove()
-    }
-
-    return httpClient.delete<ApiResponse<null>>(
-      `/api/event-schedule/${id}`,
-      { skipErrorRedirect: true }
-    )
+  remove(_id: number) {
+    return withDemoMutation(() => demoEventScheduleApi.remove())
   },
 
   generateShareLink(eventId: number) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleApi.generateShareLink(eventId)
-    }
-
-    return httpClient.post<EventScheduleShareLinkResponse>(
-      `/api/events/${eventId}/schedule/share-link`,
-      undefined,
-      { skipErrorRedirect: true }
-    )
+    return demoEventScheduleApi.generateShareLink(eventId)
   },
 
   getPublicByShareHash(shareHash: string) {
-    if (IS_DEMO_MODE) {
-      return demoEventScheduleApi.getPublicByShareHash(shareHash)
-    }
-
-    return httpClient.get<PublicEventSchedulePageResponse>(
-      `/api/public/event-schedules/${encodeURIComponent(shareHash)}`,
-      { skipAuthRefresh: true, skipErrorRedirect: true }
-    )
+    return demoEventScheduleApi.getPublicByShareHash(shareHash)
   }
 }

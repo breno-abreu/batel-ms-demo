@@ -1,17 +1,7 @@
 import { demoRepertoireGroupApi } from '@/demo/api/repertoireDemoApi'
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
-import { httpClient } from '@/services/httpClient'
+import { withDemoMutation } from '@/demo/demoRequest'
 import type { RepertoireListItem } from '@/types/repertoire'
-import type {
-  CreateRepertoireGroupRequest,
-  PublicRepertoireGroupResponse,
-  RepertoireGroupListResponse,
-  RepertoireGroupRepertoireListResponse,
-  RepertoireGroupResponse,
-  RepertoireGroupShareLinkResponse,
-  UpdateRepertoireGroupRequest
-} from '@/types/repertoireGroup'
-import type { ApiResponse } from '@/types/auth'
+import type { CreateRepertoireGroupRequest, UpdateRepertoireGroupRequest } from '@/types/repertoireGroup'
 
 const PUBLIC_SHARE_ROUTE = '/public/repertorio-pasta'
 
@@ -25,121 +15,46 @@ export function buildPublicShareUrl(shareHash: string): string {
 
 export const repertoireGroupService = {
   list() {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.list()
-    }
-
-    return httpClient.get<RepertoireGroupListResponse>('/api/repertoire-groups')
+    return demoRepertoireGroupApi.list()
   },
-
   getById(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.getById(id)
-    }
-
-    return httpClient.get<RepertoireGroupResponse>(`/api/repertoire-groups/${id}`)
+    return demoRepertoireGroupApi.getById(id)
   },
 
-  create(payload: CreateRepertoireGroupRequest) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.create()
-    }
-
-    return httpClient.post<RepertoireGroupResponse>(
-      '/api/repertoire-groups',
-      payload,
-      { skipErrorRedirect: true }
-    )
+  create(_payload: CreateRepertoireGroupRequest) {
+    return withDemoMutation(() => demoRepertoireGroupApi.create())
   },
 
   update(id: number, payload: UpdateRepertoireGroupRequest) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.update(id, payload)
-    }
-
-    return httpClient.put<RepertoireGroupResponse>(
-      `/api/repertoire-groups/${id}`,
-      payload,
-      { skipErrorRedirect: true }
-    )
+    return withDemoMutation(() => demoRepertoireGroupApi.update(id, payload))
   },
 
-  remove(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.remove()
-    }
-
-    return httpClient.delete<ApiResponse<null>>(
-      `/api/repertoire-groups/${id}`,
-      { skipErrorRedirect: true }
-    )
+  remove(_id: number) {
+    return withDemoMutation(() => demoRepertoireGroupApi.remove())
   },
 
   generateShareLink(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.generateShareLink(id)
-    }
-
-    return httpClient.post<RepertoireGroupShareLinkResponse>(
-      `/api/repertoire-groups/${id}/share-link`,
-      undefined,
-      { skipErrorRedirect: true }
-    )
+    return demoRepertoireGroupApi.generateShareLink(id)
   },
 
   listRepertoires(id: number) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.listRepertoires(id)
-    }
-
-    return httpClient.get<RepertoireGroupRepertoireListResponse>(
-      `/api/repertoire-groups/${id}/repertoires`
-    )
+    return demoRepertoireGroupApi.listRepertoires(id)
   },
 
-  addRepertoire(groupId: number, repertoireId: number) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.addRepertoire()
-    }
-
-    return httpClient.post<ApiResponse<null>>(
-      `/api/repertoire-groups/${groupId}/repertoires/${repertoireId}`,
-      undefined,
-      { skipErrorRedirect: true }
-    )
+  addRepertoire(_groupId: number, _repertoireId: number) {
+    return withDemoMutation(() => demoRepertoireGroupApi.addRepertoire())
   },
 
-  removeRepertoire(groupId: number, repertoireId: number) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.removeRepertoire()
-    }
-
-    return httpClient.delete<ApiResponse<null>>(
-      `/api/repertoire-groups/${groupId}/repertoires/${repertoireId}`,
-      { skipErrorRedirect: true }
-    )
+  removeRepertoire(_groupId: number, _repertoireId: number) {
+    return withDemoMutation(() => demoRepertoireGroupApi.removeRepertoire())
   },
 
   getPublicByShareHash(shareHash: string) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.getPublicByShareHash(shareHash)
-    }
-
-    return httpClient.get<PublicRepertoireGroupResponse>(
-      `/api/public/repertoire-groups/${encodeURIComponent(shareHash)}`,
-      { skipAuthRefresh: true, skipErrorRedirect: true }
-    )
+    return demoRepertoireGroupApi.getPublicByShareHash(shareHash)
   },
 
   listPublicRepertoires(shareHash: string) {
-    if (IS_DEMO_MODE) {
-      return demoRepertoireGroupApi.listPublicRepertoires(shareHash)
-    }
-
-    return httpClient.get<RepertoireGroupRepertoireListResponse>(
-      `/api/public/repertoire-groups/${encodeURIComponent(shareHash)}/repertoires`,
-      { skipAuthRefresh: true, skipErrorRedirect: true }
-    )
+    return demoRepertoireGroupApi.listPublicRepertoires(shareHash)
   }
 }
 

@@ -389,10 +389,8 @@ import {
   usefulLinkGroupService
 } from '@/services/usefulLinkGroupService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type { UsefulLink } from '@/types/usefulLinks'
 import type { UpdateUsefulLinkGroupRequest, UsefulLinkGroup } from '@/types/usefulLinkGroup'
-import { Permissions } from '@/utils/permissions'
 const NAME_MAX_LENGTH = 120
 const DESCRIPTION_MAX_LENGTH = 2000
 type GroupForm = {
@@ -446,11 +444,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageLinks(): boolean {
-      return this.authStore.hasPermission(Permissions.UsefulLinksManage)
+      return true
     },
     groupId(): number | null {
       const parsedId = Number(this.$route.params.id)
@@ -461,11 +456,7 @@ export default defineComponent({
         return false
       }
 
-      return this.authStore.hasPermission(Permissions.UsefulLinkGroupsManage)
-        || (
-          this.authStore.hasPermission(Permissions.UsefulLinkGroupsManageOwn)
-          && this.group.isOwnedByCurrentUser
-        )
+      return true
     },
     pageTitle(): string {
       return this.group?.name ?? 'Pasta de links úteis'

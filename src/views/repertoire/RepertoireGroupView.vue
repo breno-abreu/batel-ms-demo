@@ -374,10 +374,8 @@ import {
   repertoireGroupService
 } from '@/services/repertoireGroupService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import { unsavedChangesStore } from '@/stores/unsavedChangesStore'
 import type { CreateRepertoireGroupRequest, RepertoireGroup } from '@/types/repertoireGroup'
-import { Permissions } from '@/utils/permissions'
 
 const REPERTOIRE_GROUP_NAME_MAX_LENGTH = 120
 const REPERTOIRE_GROUP_DESCRIPTION_MAX_LENGTH = 2000
@@ -426,14 +424,11 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageAllGroups(): boolean {
-      return this.authStore.hasPermission(Permissions.RepertoireGroupsManage)
+      return true
     },
     canManageOwnGroups(): boolean {
-      return this.authStore.hasPermission(Permissions.RepertoireGroupsManageOwn)
+      return true
     },
     canCreateGroup(): boolean {
       return this.canManageAllGroups || this.canManageOwnGroups

@@ -42,7 +42,6 @@ import { defineComponent } from 'vue'
 import { RouterLink } from 'vue-router'
 import { ArrowRightIcon, HomeIcon } from '@lucide/vue'
 import { getHomeShortcutItems } from '@/navigation/sidebarNavItems'
-import { useAuthStore } from '@/stores/authStore'
 
 export default defineComponent({
   name: 'HomeView',
@@ -52,11 +51,8 @@ export default defineComponent({
     RouterLink
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     shortcuts() {
-      return getHomeShortcutItems(this.authStore)
+      return getHomeShortcutItems()
     }
   }
 })

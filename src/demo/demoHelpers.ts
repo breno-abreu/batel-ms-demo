@@ -1,4 +1,4 @@
-import type { ApiResponse, PagedResult } from '@/types/auth'
+import type { ApiResponse, PagedResult } from '@/types/api'
 
 const DEMO_MUTATION_MESSAGE = 'Operação simulada com sucesso no modo demonstração.'
 

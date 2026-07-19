@@ -365,14 +365,12 @@ import { musicalThemeService } from '@/services/musicalThemeService'
 import { popularityLevelService } from '@/services/popularityLevelService'
 import { repertoireService } from '@/services/repertoireService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type {
   DifficultyLevel,
   MusicalTheme,
   PopularityLevel,
   RepertoireListItem
 } from '@/types/repertoire'
-import { Permissions } from '@/utils/permissions'
 
 const REPERTOIRE_PAGE_SIZE = 20
 const SEARCH_DEBOUNCE_MS = 400
@@ -420,11 +418,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageRepertoire(): boolean {
-      return this.authStore.hasPermission(Permissions.RepertoireManage)
+      return true
     },
     hasActiveFilters(): boolean {
       return this.searchQuery.trim().length > 0

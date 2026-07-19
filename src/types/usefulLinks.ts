@@ -1,4 +1,4 @@
-import type { ApiResponse, PagedResult } from '@/types/auth'
+import type { ApiResponse, PagedResult } from '@/types/api'
 
 export type UsefulLinkType = {
   id: number

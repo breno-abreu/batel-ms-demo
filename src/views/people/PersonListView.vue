@@ -152,9 +152,7 @@ import AppTooltip from '@/components/feedback/AppTooltip.vue'
 import { confirmDialogService } from '@/services/confirmDialogService'
 import { personService } from '@/services/personService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type { PersonListItem } from '@/types/people'
-import { Permissions } from '@/utils/permissions'
 import { formatBrazilianMobilePhone } from '@/utils/phone'
 
 export default defineComponent({
@@ -179,14 +177,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
-    isAdmin(): boolean {
-      return this.authStore.isAdmin
-    },
     canManagePeople(): boolean {
-      return this.authStore.hasPermission(Permissions.PeopleManage)
+      return true
     },
     normalizedSearchQuery(): string {
       return this.searchQuery.trim().toLocaleLowerCase('pt-BR')
@@ -263,25 +255,16 @@ export default defineComponent({
         parts.push(`${item.skillCount} habilidade${item.skillCount > 1 ? 's' : ''}`)
       }
 
-      if (item.hasSystemUser) {
-        parts.push('Usuário do sistema')
-      }
-
       return parts.join(' · ')
     },
 
     canDelete(item: PersonListItem): boolean {
-      return !item.hasSystemUser
-        && item.ministryCount === 0
+      return item.ministryCount === 0
         && item.skillCount === 0
         && item.managedMinistryCount === 0
     },
 
     getDeleteTooltip(item: PersonListItem): string {
-      if (item.hasSystemUser) {
-        return 'Não é possível excluir uma pessoa com usuário do sistema vinculado'
-      }
-
       if (item.managedMinistryCount > 0) {
         return 'Não é possível excluir uma pessoa responsável por ministérios'
       }
@@ -305,9 +288,7 @@ export default defineComponent({
       if (item.isActive) {
         const confirmed = await confirmDialogService.confirm({
           title: 'Desativar pessoa',
-          message: item.hasSystemUser
-            ? `Deseja desativar "${this.formatPersonName(item)}"? A pessoa perderá o acesso ao sistema e de administrador, e não poderá mais fazer login. Essa ação pode ser revertida depois, reativando a pessoa e concedendo o acesso novamente.`
-            : `Deseja desativar "${this.formatPersonName(item)}"? Essa ação pode ser revertida depois, reativando a pessoa.`,
+          message: `Deseja desativar "${this.formatPersonName(item)}"? Essa ação pode ser revertida depois, reativando a pessoa.`,
           confirmLabel: 'Desativar',
           cancelLabel: 'Cancelar',
           tone: 'danger'

@@ -1,4 +1,4 @@
-import type { ApiResponse } from '@/types/auth'
+import type { ApiResponse } from '@/types/api'
 
 export type CatalogItemBase = {
   id: number

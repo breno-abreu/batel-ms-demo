@@ -327,7 +327,6 @@ import { musicalThemeService } from '@/services/musicalThemeService'
 import { popularityLevelService } from '@/services/popularityLevelService'
 import { repertoireService } from '@/services/repertoireService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type {
   DifficultyLevel,
   MusicalTheme,
@@ -335,7 +334,6 @@ import type {
   SaveRepertoireRequest
 } from '@/types/repertoire'
 import { isValidOptionalUrl, normalizeOptionalUrl } from '@/utils/urlUtils'
-import { Permissions } from '@/utils/permissions'
 
 const SONG_NAME_MAX_LENGTH = 100
 const AUTHOR_MAX_LENGTH = 100
@@ -461,11 +459,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageRepertoire(): boolean {
-      return this.authStore.hasPermission(Permissions.RepertoireManage)
+      return true
     },
     isCreateMode(): boolean {
       return this.$route.params.id === 'new'

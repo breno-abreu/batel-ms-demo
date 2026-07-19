@@ -1,4 +1,3 @@
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
 import type {
   AnalyticsAbsencePeriod,
   AnalyticsTimeRange,
@@ -19,9 +18,6 @@ export type MockEngagementQuery = {
   absencePeriod: AnalyticsAbsencePeriod
   rankingLimit?: number
 }
-
-/** Equivale a IS_DEMO_MODE — não manter true fixo bloqueando a API. */
-export const USE_ENGAGEMENT_ANALYTICS_MOCK = IS_DEMO_MODE
 
 export const MOCK_ANALYTICS_MINISTRIES: Ministry[] = [
   {

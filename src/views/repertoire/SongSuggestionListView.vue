@@ -312,13 +312,11 @@ import AppTooltip from '@/components/feedback/AppTooltip.vue'
 import { confirmDialogService } from '@/services/confirmDialogService'
 import { songSuggestionService } from '@/services/songSuggestionService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type {
   CreateSongSuggestionRequest,
   SongSuggestionListItem,
   UpdateSongSuggestionRequest
 } from '@/types/songSuggestion'
-import { Permissions } from '@/utils/permissions'
 
 const SONG_SUGGESTION_NAME_MAX_LENGTH = 200
 const SONG_SUGGESTION_URL_MAX_LENGTH = 1000
@@ -372,11 +370,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageSuggestions(): boolean {
-      return this.authStore.hasPermission(Permissions.SongSuggestionsManageOwn)
+      return true
     },
     normalizedSearchQuery(): string {
       return this.searchQuery.trim().toLocaleLowerCase('pt-BR')

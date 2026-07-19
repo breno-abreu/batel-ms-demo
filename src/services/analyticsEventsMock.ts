@@ -1,13 +1,9 @@
-import { IS_DEMO_MODE } from '@/demo/demoConfig'
 import type {
   AnalyticsTimeRange,
   EventAnalytics,
   EventAnalyticsPeriod,
   EventAnalyticsSeries
 } from '@/types/analytics'
-
-/** Equivale a IS_DEMO_MODE — não manter true fixo bloqueando a API. */
-export const USE_EVENT_ANALYTICS_MOCK = IS_DEMO_MODE
 
 type MockEventQuery = {
   range: AnalyticsTimeRange

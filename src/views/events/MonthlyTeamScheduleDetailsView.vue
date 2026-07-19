@@ -274,7 +274,6 @@ import {
   teamScheduleService
 } from '@/services/teamScheduleService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type { RepertoireListItem } from '@/types/repertoire'
 import type {
   MinistryMemberForSchedule,
@@ -316,7 +315,6 @@ import {
   type MonthlyScheduleRepertoireCell,
   type MonthlyScheduleRepertoireGroupCell
 } from '@/utils/monthlySchedule'
-import { Permissions } from '@/utils/permissions'
 
 export default defineComponent({
   name: 'MonthlyTeamScheduleDetailsView',
@@ -371,11 +369,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageTeamSchedule(): boolean {
-      return this.authStore.hasPermission(Permissions.TeamSchedulesManage)
+      return true
     },
     eventIds(): number[] {
       return this.events.map((event) => event.eventId)

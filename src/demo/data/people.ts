@@ -1,4 +1,4 @@
-import { DEMO_USER } from '@/demo/demoAuth'
+import { DEMO_USER } from '@/demo/demoUser'
 import { demoAudit } from '@/demo/demoHelpers'
 import type {
   Ministry,
@@ -116,14 +116,6 @@ export const demoPeopleDetails: PersonDetails[] = Array.from({ length: 24 }, (_,
     mobilePhone: `(41) 9${String(8000 + id).padStart(4, '0')}-${String(1000 + id).padStart(4, '0')}`,
     notes: index % 3 === 0 ? 'Participante ativo nas escalas.' : null,
     isActive: index !== 20,
-    hasSystemUser: index < 10,
-    hasSystemAccess: index < 8,
-    isAdmin: id === 1,
-    systemUserEmail: index < 10
-      ? (id === 1 ? DEMO_USER.email : `${preferredName.toLowerCase()}.${id}@demo.batelms.app`)
-      : null,
-    systemLastLoginAt: index < 10 ? '2026-07-10T09:15:00.000Z' : null,
-    hasPassword: index < 10,
     ministries: [{ id: ministry.id, name: ministry.name }],
     skills: [
       { id: skillA.id, name: skillA.name },
@@ -132,11 +124,6 @@ export const demoPeopleDetails: PersonDetails[] = Array.from({ length: 24 }, (_,
     managedMinistries: demoMinistries
       .filter((item) => item.personIdManager === id)
       .map((item) => ({ id: item.id, name: item.name })),
-    roles: id === 1
-      ? [{ id: 1, name: 'Administrador' }]
-      : index < 8
-        ? [{ id: 2, name: 'Worship Manager' }]
-        : [],
     ...demoAudit
   }
 })
@@ -150,8 +137,7 @@ export const demoPeopleList: PersonListItem[] = demoPeopleDetails.map((person) =
   isActive: person.isActive,
   ministryCount: person.ministries.length,
   skillCount: person.skills.length,
-  managedMinistryCount: person.managedMinistries.length,
-  hasSystemUser: person.hasSystemUser
+  managedMinistryCount: person.managedMinistries.length
 }))
 
 export const demoPeopleSummaries: PersonSummary[] = demoPeopleDetails

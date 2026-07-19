@@ -182,10 +182,8 @@ import { ArrowLeftIcon, Link2Icon } from '@lucide/vue'
 import { usefulLinkService } from '@/services/usefulLinkService'
 import { usefulLinkTypeService } from '@/services/usefulLinkTypeService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
 import type { SaveUsefulLinkRequest, UsefulLinkType } from '@/types/usefulLinks'
 import { isValidOptionalUrl, normalizeOptionalUrl } from '@/utils/urlUtils'
-import { Permissions } from '@/utils/permissions'
 
 const NAME_MAX_LENGTH = 120
 const URL_MAX_LENGTH = 1000
@@ -228,11 +226,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageLinks(): boolean {
-      return this.authStore.hasPermission(Permissions.UsefulLinksManage)
+      return true
     },
     isCreateMode(): boolean {
       return this.$route.params.id === 'new'

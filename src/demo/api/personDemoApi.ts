@@ -8,7 +8,7 @@ import {
   getDemoBirthdays,
   getDemoMinistryMembers
 } from '@/demo/data/people'
-import { DEMO_USER } from '@/demo/demoAuth'
+import { DEMO_USER } from '@/demo/demoUser'
 import { demoMutationOk, demoNotFound, demoOk } from '@/demo/demoHelpers'
 
 export const demoPersonApi = {
@@ -52,7 +52,6 @@ export const demoPersonApi = {
     const person = demoPeopleDetails.find((item) => item.id === DEMO_USER.personId) ?? demoPeopleDetails[0]
     return demoMutationOk(person)
   },
-  changeOwnPassword: async () => demoMutationOk(null),
   toggleActive: async (id: number) => {
     const person = demoPeopleDetails.find((item) => item.id === id) ?? demoPeopleDetails[0]
     return demoMutationOk(person)

@@ -250,8 +250,6 @@ import { eventTypeService } from '@/services/eventTypeService'
 import { ministryService } from '@/services/ministryService'
 import { personService } from '@/services/personService'
 import { toastService } from '@/services/toastService'
-import { useAuthStore } from '@/stores/authStore'
-import { Permissions } from '@/utils/permissions'
 import type {
   CreateEventRequest,
   EventCalendarItem,
@@ -347,11 +345,8 @@ export default defineComponent({
     }
   },
   computed: {
-    authStore() {
-      return useAuthStore()
-    },
     canManageAgenda(): boolean {
-      return this.authStore.hasPermission(Permissions.EventsAgendaManage)
+      return true
     },
     weekDays(): Date[] {
       return getWeekDays(this.weekStart)
