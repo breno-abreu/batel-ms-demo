@@ -25,6 +25,7 @@
 
     <AppToastContainer />
     <AppConfirmDialog />
+    <DemoNoticeModal :enabled="showDemoNotice" />
     <BirthdayGreetingModal :enabled="showBirthdayGreeting" />
   </div>
 </template>
@@ -34,6 +35,7 @@ import { defineComponent } from 'vue'
 import { RouterView } from 'vue-router'
 import AppConfirmDialog from '@/components/feedback/AppConfirmDialog.vue'
 import BirthdayGreetingModal from '@/components/feedback/BirthdayGreetingModal.vue'
+import DemoNoticeModal from '@/components/feedback/DemoNoticeModal.vue'
 import AppNavbar from '@/components/navbar/AppNavbar.vue'
 import AppSidebar from '@/components/navbar/AppSidebar.vue'
 import AppToastContainer from '@/components/feedback/AppToastContainer.vue'
@@ -49,6 +51,7 @@ export default defineComponent({
     AppSidebar,
     AppToastContainer,
     BirthdayGreetingModal,
+    DemoNoticeModal,
     MobileUnsupportedView,
     RouterView
   },
@@ -80,6 +83,13 @@ export default defineComponent({
       }
 
       return !this.$route.matched.some((record) => record.meta.hideNavbar === true)
+    },
+    showDemoNotice(): boolean {
+      if (this.isMobileUnsupported || this.isPublicShareRoute) {
+        return false
+      }
+
+      return this.$route.matched.some((record) => record.meta.appShell === true)
     },
     showBirthdayGreeting(): boolean {
       if (this.isMobileUnsupported) {

@@ -3605,6 +3605,100 @@ a.sortable-list__action {
   }
 }
 
+.demo-notice-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.demo-notice {
+  width: min(100%, 480px);
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+}
+
+.demo-notice__header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.demo-notice__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-denim);
+  background: var(--color-primary-soft);
+  border: 1px solid rgba(47, 85, 127, 0.22);
+  border-radius: var(--radius-md);
+}
+
+.demo-notice__title {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.demo-notice__lead {
+  margin: 8px 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.demo-notice__body {
+  margin: 16px 0 0;
+  padding: 14px 16px;
+  color: var(--color-text);
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.demo-notice__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.demo-notice-enter-active,
+.demo-notice-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.demo-notice-enter-active .demo-notice,
+.demo-notice-leave-active .demo-notice {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.demo-notice-enter-from,
+.demo-notice-leave-to {
+  opacity: 0;
+}
+
+.demo-notice-enter-from .demo-notice,
+.demo-notice-leave-to .demo-notice {
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+}
+
 .repertoire-table__title-link {
   color: var(--color-primary);
   font-weight: 700;
