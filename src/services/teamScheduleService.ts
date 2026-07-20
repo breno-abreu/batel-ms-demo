@@ -1,6 +1,7 @@
 import { demoTeamScheduleApi } from '@/demo/api/eventDemoApi'
 import { DEMO_PUBLIC_SHARE_HASH } from '@/demo/publicShare'
 import { withDemoMutation } from '@/demo/demoRequest'
+import { buildAppAbsoluteUrl } from '@/utils/urlUtils'
 import type { ApiResponse } from '@/types/api'
 import type { RepertoireListItem } from '@/types/repertoire'
 import type { SaveMonthlyTeamScheduleRequest } from '@/types/teamSchedules'
@@ -29,22 +30,12 @@ export type PublicTeamScheduleRepertoireListResponse = ApiResponse<RepertoireLis
 
 export function buildPublicTeamScheduleShareUrl(_shareHash?: string): string {
   const shareHash = DEMO_PUBLIC_SHARE_HASH.teamSchedule
-
-  if (typeof window === 'undefined') {
-    return `${PUBLIC_SCHEDULE_SHARE_ROUTE}/${shareHash}`
-  }
-
-  return `${window.location.origin}${PUBLIC_SCHEDULE_SHARE_ROUTE}/${shareHash}`
+  return buildAppAbsoluteUrl(`${PUBLIC_SCHEDULE_SHARE_ROUTE}/${shareHash}`)
 }
 
 export function buildPublicMonthlyTeamScheduleShareUrl(_shareHash?: string): string {
   const shareHash = DEMO_PUBLIC_SHARE_HASH.monthlyTeamSchedule
-
-  if (typeof window === 'undefined') {
-    return `${PUBLIC_MONTHLY_SCHEDULE_SHARE_ROUTE}/${shareHash}`
-  }
-
-  return `${window.location.origin}${PUBLIC_MONTHLY_SCHEDULE_SHARE_ROUTE}/${shareHash}`
+  return buildAppAbsoluteUrl(`${PUBLIC_MONTHLY_SCHEDULE_SHARE_ROUTE}/${shareHash}`)
 }
 
 export const teamScheduleService = {

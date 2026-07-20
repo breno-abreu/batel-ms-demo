@@ -1,18 +1,14 @@
 import { demoEventScheduleApi } from '@/demo/api/eventDemoApi'
 import { DEMO_PUBLIC_SHARE_HASH } from '@/demo/publicShare'
 import { withDemoMutation } from '@/demo/demoRequest'
+import { buildAppAbsoluteUrl } from '@/utils/urlUtils'
 import type { CreateEventScheduleRequest, UpdateEventScheduleRequest } from '@/types/eventSchedule'
 
 const PUBLIC_EVENT_SCHEDULE_SHARE_ROUTE = '/public/cronogramas'
 
 export function buildPublicEventScheduleShareUrl(_shareHash?: string): string {
   const shareHash = DEMO_PUBLIC_SHARE_HASH.eventSchedule
-
-  if (typeof window === 'undefined') {
-    return `${PUBLIC_EVENT_SCHEDULE_SHARE_ROUTE}/${shareHash}`
-  }
-
-  return `${window.location.origin}${PUBLIC_EVENT_SCHEDULE_SHARE_ROUTE}/${shareHash}`
+  return buildAppAbsoluteUrl(`${PUBLIC_EVENT_SCHEDULE_SHARE_ROUTE}/${shareHash}`)
 }
 
 export const eventScheduleService = {
