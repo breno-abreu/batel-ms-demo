@@ -109,7 +109,7 @@ function buildScheduleItems(eventId: number): EventScheduleItem[] {
 
 export const demoEventSchedules: Record<number, EventSchedulePage> = Object.fromEntries(
   demoEvents.slice(0, 12).map((event) => {
-    const shareHash = event.id <= 4 ? `event-schedule-${event.id}-demo` : null
+    const isPublic = event.id <= 4
     return [
       event.id,
       {
@@ -118,19 +118,15 @@ export const demoEventSchedules: Record<number, EventSchedulePage> = Object.from
         eventDate: event.eventDate,
         eventStartTime: event.startTime,
         eventEndTime: event.endTime,
-        publicShareHash: shareHash,
+        publicShareHash: isPublic ? 'demo' : null,
         items: buildScheduleItems(event.id)
       }
     ]
   })
 )
 
-export function getPublicEventSchedule(shareHash: string): PublicEventSchedulePage | null {
-  const page = Object.values(demoEventSchedules).find((item) => item.publicShareHash === shareHash)
-
-  if (!page) {
-    return null
-  }
+export function getDemoPublicEventSchedule(): PublicEventSchedulePage {
+  const page = Object.values(demoEventSchedules)[0]
 
   return {
     eventName: page.eventName,
@@ -145,6 +141,10 @@ export function getPublicEventSchedule(shareHash: string): PublicEventSchedulePa
       notes: item.notes
     }))
   }
+}
+
+export function getPublicEventSchedule(_shareHash: string): PublicEventSchedulePage | null {
+  return getDemoPublicEventSchedule()
 }
 
 function toTemplateItems(eventId: number, templateId: number, limit?: number) {
@@ -218,7 +218,7 @@ export function getDemoMonthlyTeamSchedule(
     eventDate: event.eventDate,
     startTime: event.startTime,
     endTime: event.endTime,
-    publicShareHash: index < 2 ? `team-schedule-${event.id}-demo` : null
+    publicShareHash: index < 2 ? 'demo' : null
   }))
 
   const people = demoPeopleDetails.filter((person) =>
@@ -276,30 +276,31 @@ export function getDemoMonthlyTeamSchedule(
   }
 }
 
-export function getPublicTeamSchedule(shareHash: string) {
-  for (const ministry of demoMinistries) {
-    const data = getDemoMonthlyTeamSchedule(ministry.id, currentYear, currentMonth)
-    const event = data.events.find((item) => item.publicShareHash === shareHash)
+export function getDemoPublicTeamSchedule() {
+  const ministry = demoMinistries[0]
+  const data = getDemoMonthlyTeamSchedule(ministry.id, currentYear, currentMonth)
+  const event = data.events[0]
 
-    if (!event) {
-      continue
-    }
-
-    const eventRepertoires = data.repertoires.filter((item) => item.eventId === event.eventId)
-    const eventFolders = data.repertoireGroups.filter((item) => item.eventId === event.eventId)
-
-    return {
-      eventName: event.eventName,
-      eventDate: event.eventDate,
-      startTime: event.startTime,
-      endTime: event.endTime,
-      ministryName: data.ministryName,
-      songCount: eventRepertoires.length,
-      usesFolder: eventFolders.length > 0,
-      folderName: eventFolders[0]?.repertoireGroupName ?? null,
-      repertoireIds: eventRepertoires.map((item) => item.repertoireId)
-    }
+  if (!event) {
+    return null
   }
 
-  return null
+  const eventRepertoires = data.repertoires.filter((item) => item.eventId === event.eventId)
+  const eventFolders = data.repertoireGroups.filter((item) => item.eventId === event.eventId)
+
+  return {
+    eventName: event.eventName,
+    eventDate: event.eventDate,
+    startTime: event.startTime,
+    endTime: event.endTime,
+    ministryName: data.ministryName,
+    songCount: eventRepertoires.length,
+    usesFolder: eventFolders.length > 0,
+    folderName: eventFolders[0]?.repertoireGroupName ?? null,
+    repertoireIds: eventRepertoires.map((item) => item.repertoireId)
+  }
+}
+
+export function getPublicTeamSchedule(_shareHash: string) {
+  return getDemoPublicTeamSchedule()
 }

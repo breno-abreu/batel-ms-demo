@@ -35,16 +35,16 @@ const groupNames = [
 
 export const demoUsefulLinkGroups: UsefulLinkGroup[] = groupNames.map((name, index) => {
   const id = index + 1
-  const shareHash = index < 3 ? `ulink-group-${id}-demo` : null
+  const isPublic = index < 3
 
   return {
     id,
     name,
     description: `Pasta de links: ${name}`,
-    isPublic: Boolean(shareHash),
-    allowPublicLinkAccess: Boolean(shareHash),
-    hasPublicShareLink: Boolean(shareHash),
-    publicShareHash: shareHash,
+    isPublic,
+    allowPublicLinkAccess: isPublic,
+    hasPublicShareLink: isPublic,
+    publicShareHash: isPublic ? 'demo' : null,
     ownerUserId: 1,
     isOwnedByCurrentUser: true,
     itemCount: 5 + index,

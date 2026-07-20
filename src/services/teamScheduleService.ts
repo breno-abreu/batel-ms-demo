@@ -1,4 +1,5 @@
 import { demoTeamScheduleApi } from '@/demo/api/eventDemoApi'
+import { DEMO_PUBLIC_SHARE_HASH } from '@/demo/publicShare'
 import { withDemoMutation } from '@/demo/demoRequest'
 import type { ApiResponse } from '@/types/api'
 import type { RepertoireListItem } from '@/types/repertoire'
@@ -26,7 +27,9 @@ export type TeamScheduleShareLinkResponse = ApiResponse<TeamScheduleShareLink>
 export type PublicTeamScheduleResponse = ApiResponse<PublicTeamSchedule>
 export type PublicTeamScheduleRepertoireListResponse = ApiResponse<RepertoireListItem[]>
 
-export function buildPublicTeamScheduleShareUrl(shareHash: string): string {
+export function buildPublicTeamScheduleShareUrl(_shareHash?: string): string {
+  const shareHash = DEMO_PUBLIC_SHARE_HASH.teamSchedule
+
   if (typeof window === 'undefined') {
     return `${PUBLIC_SCHEDULE_SHARE_ROUTE}/${shareHash}`
   }
@@ -34,7 +37,9 @@ export function buildPublicTeamScheduleShareUrl(shareHash: string): string {
   return `${window.location.origin}${PUBLIC_SCHEDULE_SHARE_ROUTE}/${shareHash}`
 }
 
-export function buildPublicMonthlyTeamScheduleShareUrl(shareHash: string): string {
+export function buildPublicMonthlyTeamScheduleShareUrl(_shareHash?: string): string {
+  const shareHash = DEMO_PUBLIC_SHARE_HASH.monthlyTeamSchedule
+
   if (typeof window === 'undefined') {
     return `${PUBLIC_MONTHLY_SCHEDULE_SHARE_ROUTE}/${shareHash}`
   }

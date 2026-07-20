@@ -5,6 +5,7 @@ import {
   demoRepertoires,
   toRepertoireListItem
 } from '@/demo/data/repertoire'
+import { DEMO_PUBLIC_SHARE_HASH } from '@/demo/publicShare'
 import { demoMutationOk, demoNotFound, demoOk, matchesSearch, paginateItems } from '@/demo/demoHelpers'
 import type { RepertoireListQuery } from '@/types/repertoire'
 import type { UpdateRepertoireGroupRequest } from '@/types/repertoireGroup'
@@ -92,10 +93,9 @@ export const demoRepertoireGroupApi = {
     })
   },
   remove: async () => demoMutationOk(null),
-  generateShareLink: async (id: number) => {
-    const group = demoRepertoireGroups.find((item) => item.id === id)
+  generateShareLink: async (_id: number) => {
     return demoMutationOk({
-      shareHash: group?.publicShareHash ?? `rep-group-${id}-demo`
+      shareHash: DEMO_PUBLIC_SHARE_HASH.repertoireGroup
     })
   },
   listRepertoires: async (id: number) => {
@@ -108,12 +108,8 @@ export const demoRepertoireGroupApi = {
   },
   addRepertoire: async () => demoMutationOk(null),
   removeRepertoire: async () => demoMutationOk(null),
-  getPublicByShareHash: async (shareHash: string) => {
-    const group = demoRepertoireGroups.find((item) => item.publicShareHash === shareHash)
-
-    if (!group) {
-      return demoNotFound()
-    }
+  getPublicByShareHash: async (_shareHash: string) => {
+    const group = demoRepertoireGroups[0]
 
     return demoOk({
       id: group.id,
@@ -122,13 +118,8 @@ export const demoRepertoireGroupApi = {
       itemCount: group.itemCount
     })
   },
-  listPublicRepertoires: async (shareHash: string) => {
-    const group = demoRepertoireGroups.find((item) => item.publicShareHash === shareHash)
-
-    if (!group) {
-      return demoNotFound()
-    }
-
+  listPublicRepertoires: async (_shareHash: string) => {
+    const group = demoRepertoireGroups[0]
     const ids = demoRepertoireGroupItems[group.id] ?? []
     const items = ids
       .map((repertoireId) => demoRepertoires.find((item) => item.id === repertoireId))

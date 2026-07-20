@@ -4,11 +4,13 @@ import {
   demoEventScheduleTemplates,
   demoEvents,
   getDemoMonthlyTeamSchedule,
-  getPublicEventSchedule,
-  getPublicTeamSchedule,
+  getDemoPublicEventSchedule,
+  getDemoPublicTeamSchedule,
   toEventCalendarItem
 } from '@/demo/data/events'
+import { demoMinistries } from '@/demo/data/people'
 import { demoRepertoireList } from '@/demo/data/repertoire'
+import { DEMO_PUBLIC_SHARE_HASH } from '@/demo/publicShare'
 import { demoMutationOk, demoNotFound, demoOk } from '@/demo/demoHelpers'
 import type { SeriesEditScope } from '@/types/events'
 import type {
@@ -95,15 +97,13 @@ export const demoEventScheduleApi = {
     return item ? demoMutationOk(item) : demoNotFound()
   },
   remove: async () => demoMutationOk(null),
-  generateShareLink: async (eventId: number) => {
-    const page = demoEventSchedules[eventId]
+  generateShareLink: async (_eventId: number) => {
     return demoMutationOk({
-      shareHash: page?.publicShareHash ?? `event-schedule-${eventId}-demo`
+      shareHash: DEMO_PUBLIC_SHARE_HASH.eventSchedule
     })
   },
-  getPublicByShareHash: async (shareHash: string) => {
-    const page = getPublicEventSchedule(shareHash)
-    return page ? demoOk(page) : demoNotFound()
+  getPublicByShareHash: async (_shareHash: string) => {
+    return demoOk(getDemoPublicEventSchedule())
   }
 }
 
@@ -127,21 +127,16 @@ export const demoTeamScheduleApi = {
     demoMutationOk(
       getDemoMonthlyTeamSchedule(payload.ministryId, payload.year, payload.month)
     ),
-  generateShareLink: async (_ministryId: number, eventId: number) =>
-    demoMutationOk({ shareHash: `team-schedule-${eventId}-demo` }),
-  generateMonthlyShareLink: async (ministryId: number, year: number, month: number) =>
-    demoMutationOk({ shareHash: `monthly-${ministryId}-${year}-${month}-demo` }),
-  getPublicMonthlyByShareHash: async (shareHash: string) => {
-    const match = /^monthly-(\d+)-(\d{4})-(\d{1,2})-demo$/.exec(shareHash)
-
-    if (!match) {
-      return demoNotFound()
-    }
-
+  generateShareLink: async (_ministryId: number, _eventId: number) =>
+    demoMutationOk({ shareHash: DEMO_PUBLIC_SHARE_HASH.teamSchedule }),
+  generateMonthlyShareLink: async (_ministryId: number, _year: number, _month: number) =>
+    demoMutationOk({ shareHash: DEMO_PUBLIC_SHARE_HASH.monthlyTeamSchedule }),
+  getPublicMonthlyByShareHash: async (_shareHash: string) => {
+    const now = new Date()
     const monthly = getDemoMonthlyTeamSchedule(
-      Number(match[1]),
-      Number(match[2]),
-      Number(match[3])
+      demoMinistries[0].id,
+      now.getFullYear(),
+      now.getMonth() + 1
     )
     const payload: PublicMonthlyTeamScheduleData = {
       ministryName: monthly.ministryName,
@@ -181,8 +176,8 @@ export const demoTeamScheduleApi = {
 
     return demoOk(payload)
   },
-  getPublicByShareHash: async (shareHash: string) => {
-    const page = getPublicTeamSchedule(shareHash)
+  getPublicByShareHash: async (_shareHash: string) => {
+    const page = getDemoPublicTeamSchedule()
 
     if (!page) {
       return demoNotFound()
@@ -192,8 +187,8 @@ export const demoTeamScheduleApi = {
     void repertoireIds
     return demoOk(publicPayload)
   },
-  listPublicRepertoires: async (shareHash: string) => {
-    const page = getPublicTeamSchedule(shareHash)
+  listPublicRepertoires: async (_shareHash: string) => {
+    const page = getDemoPublicTeamSchedule()
 
     if (!page) {
       return demoNotFound()

@@ -1,11 +1,14 @@
 import { demoRepertoireGroupApi } from '@/demo/api/repertoireDemoApi'
+import { DEMO_PUBLIC_SHARE_HASH } from '@/demo/publicShare'
 import { withDemoMutation } from '@/demo/demoRequest'
 import type { RepertoireListItem } from '@/types/repertoire'
 import type { CreateRepertoireGroupRequest, UpdateRepertoireGroupRequest } from '@/types/repertoireGroup'
 
 const PUBLIC_SHARE_ROUTE = '/public/repertorio-pasta'
 
-export function buildPublicShareUrl(shareHash: string): string {
+export function buildPublicShareUrl(_shareHash?: string): string {
+  const shareHash = DEMO_PUBLIC_SHARE_HASH.repertoireGroup
+
   if (typeof window === 'undefined') {
     return `${PUBLIC_SHARE_ROUTE}/${shareHash}`
   }

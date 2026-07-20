@@ -99,16 +99,16 @@ const groupNames = [
 
 export const demoRepertoireGroups: RepertoireGroup[] = groupNames.map((name, index) => {
   const id = index + 1
-  const shareHash = index < 4 ? `rep-group-${id}-demo` : null
+  const isPublic = index < 4
 
   return {
     id,
     name,
     description: `Pasta demonstrativa: ${name}`,
-    isPublic: Boolean(shareHash),
-    allowPublicLinkAccess: Boolean(shareHash),
-    hasPublicShareLink: Boolean(shareHash),
-    publicShareHash: shareHash,
+    isPublic,
+    allowPublicLinkAccess: isPublic,
+    hasPublicShareLink: isPublic,
+    publicShareHash: isPublic ? 'demo' : null,
     ownerUserId: 1,
     isOwnedByCurrentUser: true,
     itemCount: 6 + (index % 5),

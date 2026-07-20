@@ -1,11 +1,14 @@
 import { demoUsefulLinkGroupApi } from '@/demo/api/usefulLinkDemoApi'
+import { DEMO_PUBLIC_SHARE_HASH } from '@/demo/publicShare'
 import { withDemoMutation } from '@/demo/demoRequest'
 import type { UsefulLink } from '@/types/usefulLinks'
 import type { CreateUsefulLinkGroupRequest, UpdateUsefulLinkGroupRequest, UsefulLinkGroupListQuery } from '@/types/usefulLinkGroup'
 
 const PUBLIC_SHARE_ROUTE = '/public/links-uteis'
 
-export function buildPublicShareUrl(shareHash: string): string {
+export function buildPublicShareUrl(_shareHash?: string): string {
+  const shareHash = DEMO_PUBLIC_SHARE_HASH.usefulLinkGroup
+
   if (typeof window === 'undefined') {
     return `${PUBLIC_SHARE_ROUTE}/${shareHash}`
   }

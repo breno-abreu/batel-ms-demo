@@ -3,6 +3,7 @@ import {
   demoUsefulLinkGroups,
   demoUsefulLinks
 } from '@/demo/data/usefulLinks'
+import { DEMO_PUBLIC_SHARE_HASH } from '@/demo/publicShare'
 import { demoMutationOk, demoNotFound, demoOk, matchesSearch, paginateItems } from '@/demo/demoHelpers'
 import type { UsefulLinkListQuery } from '@/types/usefulLinks'
 import type {
@@ -81,10 +82,9 @@ export const demoUsefulLinkGroupApi = {
     })
   },
   remove: async () => demoMutationOk(null),
-  generateShareLink: async (id: number) => {
-    const group = demoUsefulLinkGroups.find((item) => item.id === id)
+  generateShareLink: async (_id: number) => {
     return demoMutationOk({
-      shareHash: group?.publicShareHash ?? `ulink-group-${id}-demo`
+      shareHash: DEMO_PUBLIC_SHARE_HASH.usefulLinkGroup
     })
   },
   listUsefulLinks: async (id: number) => {
@@ -96,12 +96,8 @@ export const demoUsefulLinkGroupApi = {
   },
   addUsefulLink: async () => demoMutationOk(null),
   removeUsefulLink: async () => demoMutationOk(null),
-  getPublicByShareHash: async (shareHash: string) => {
-    const group = demoUsefulLinkGroups.find((item) => item.publicShareHash === shareHash)
-
-    if (!group) {
-      return demoNotFound()
-    }
+  getPublicByShareHash: async (_shareHash: string) => {
+    const group = demoUsefulLinkGroups[0]
 
     return demoOk({
       id: group.id,
@@ -110,13 +106,8 @@ export const demoUsefulLinkGroupApi = {
       itemCount: group.itemCount
     })
   },
-  listPublicUsefulLinks: async (shareHash: string) => {
-    const group = demoUsefulLinkGroups.find((item) => item.publicShareHash === shareHash)
-
-    if (!group) {
-      return demoNotFound()
-    }
-
+  listPublicUsefulLinks: async (_shareHash: string) => {
+    const group = demoUsefulLinkGroups[0]
     const ids = demoUsefulLinkGroupItems[group.id] ?? []
     const items = ids
       .map((linkId) => demoUsefulLinks.find((item) => item.id === linkId))
