@@ -205,6 +205,278 @@ Eu encontrei o bem mais precioso
 Eu encontrei o meu tesouro
 Eu encontrei o bem mais precioso`
 
+const EU_SOU_TEU_LYRICS = `Onde me mandares ir, eu sigo
+Tudo que o Senhor disser, repito
+Já não vivo eu, sou inteiramente teu
+
+Se não for do teu querer, eu nego
+Cada plano em tuas mãos, entrego
+Já não vivo eu, sou inteiramente teu
+
+E nada vai me afastar
+Estou seguro em tuas mãos, Jesus
+
+E eu sou teu, não sou de mais ninguem
+O teu amor me alcançou
+E devolveu o meu valor
+Eu volto a dizer, sou teu
+E pra sempre assim serei
+
+(Interlúdio)
+
+Onde me mandares ir, eu sigo
+Tudo que o Senhor disser, repito
+Já não vivo eu, sou inteiramente teu
+
+Se não for do teu querer, eu nego
+Cada plano em tuas mãos, entrego
+Já não vivo eu, sou inteiramente teu
+
+E nada vai me afastar
+Estou seguro em tuas mãos, Jesus
+
+E eu sou teu, não sou de mais ninguem
+O teu amor me alcançou
+E devolveu o meu valor
+Eu volto a dizer, sou teu
+E pra sempre assim serei
+
+Não sou de mais ninguém
+O teu mor me alcançou
+E devolveu o meu valor
+Eu volto a dizer, sou teu
+E pra sempre assim serei
+
+(Interlúdio)
+
+Onde me mandares ir ...
+Tudo que o Senhor disser...
+Já não vivo eu, sou inteiramente...
+Teu`
+
+const ALGO_NOVO_LYRICS = `Eu quero viver algo novo
+Faz meu coração arder de novo
+
+Fazendo todo medo desaparecer
+Trazendo sobre mim um novo amanhecer
+Eu quero viver algo novo
+
+Vem me visitar hoje aqui
+Quero conhecer mais de Ti
+
+Espírito, vem, Espírito, vem
+Espírito Santo
+Espírito, vem, Espírito, vem
+Espírito Santo
+
+Eu quero viver algo novo
+Faz meu coração arder de novo
+
+Fazendo todo medo desaparecer
+Trazendo sobre mim um novo amanhecer
+Eu quero viver algo novo
+
+Vem me visitar hoje aqui
+Quero conhecer mais de Ti
+
+Espírito, vem, Espírito, vem
+Espírito Santo
+Espírito, vem, Espírito, vem
+Espírito Santo
+
+Espírito, vem, Espírito, vem
+Espírito Santo
+Espírito, vem, Espírito, vem
+Espírito Santo
+
+Eu quero viver algo novo
+Faz meu coração arder de novo
+
+Fazendo todo medo desaparecer
+Trazendo sobre mim um novo amanhecer
+Eu quero viver algo novo
+
+Eu quero viver algo novo
+Faz meu coração arder de novo
+
+Fazendo todo medo desaparecer
+Trazendo sobre mim um novo amanhecer
+Eu quero viver algo novo
+
+Ohhh... ohhh... ohhh... ohhh
+Ohhh... ohhh... ohhh... ohhh
+
+Ohhh... ohhh... ohhh... ohhh
+Ohhh... ohhh... ohhh... ohhh
+
+Santo Espírito, desce como fogo
+Santo Espírito, desce como fogo
+Incendeia, incendeia
+
+Santo Espírito, desce como fogo
+Santo Espírito, desce como fogo
+Incendeia, incendeia
+
+Santo Espírito, desce como fogo
+Santo Espírito, desce como fogo
+Incendeia, incendeia
+
+Santo Espírito, desce como fogo
+Santo Espírito, desce como fogo
+Incendeia, incendeia
+
+Eu quero viver algo novo
+Faz meu coração arder de novo
+
+Fazendo todo medo desaparecer
+Trazendo sobre mim um novo amanhecer
+Eu quero viver algo novo`
+
+const ME_AMA_LYRICS = `Tem ciúmes de mim
+O Seu amor é como um furacão
+E eu me rendo ao vento de Sua misericórdia
+
+Então, de repente
+Não vejo mais minhas aflições
+Eu só vejo a glória
+E percebo quão maravilhoso Ele é
+E o tanto que Ele me quer
+
+Ô, Ele me amou
+Ô, Ele me ama
+Ele me amou
+
+(Interlúdio)
+
+Tem ciúmes de mim
+O Seu amor é como um furacão
+E eu me rendo ao vento de Sua misericórdia
+
+Então, de repente
+Não vejo mais minhas aflições
+Eu só vejo a glória
+E percebo quão maravilhoso Ele é
+E o tanto que Ele me quer
+
+Ô, Ele me amou
+Ô, Ele me ama
+Ele me amou
+
+(Interlúdio)
+
+Me ama, Ele me ama
+Ele me ama, Ele me ama
+Me ama, Ele me ama
+Ele me ama, Ele me ama
+
+Somos Sua herança
+E Ele é o nosso galardão
+Seu olhar de graça
+Nos atrai à redenção
+
+Se a graça é um oceano
+Estamos afogando
+O céu se une à terra
+Como um beijo apaixonado
+
+Meu coração dispara
+Em meu peito, acelerado
+Não tenho tempo pra perder
+Com ressentimentos
+Quando penso que Ele
+
+Me ama, Ele me ama
+Ele me ama, Ele me ama
+Me ama, Ele me ama
+Ele me ama, Ele me ama
+
+Me ama, Ele me ama
+Ele me ama, Ele me ama
+Me ama, Ele me ama
+Ele me ama, Ele me ama
+
+(Interlúdio)
+
+Oh, Ele me amou
+Oh, Ele me ama, Ele me amou
+Oh, Ele me amou
+Oh, Ele me ama, Ele me amou`
+
+const NA_CASA_LYRICS = `Fui convidado à mesa
+Larguei minhas defesas
+E vim reconhecer
+Não merecia estar aqui
+
+Comigo eu trouxe amigos
+Felizes ou feridos
+Gente que escutou
+Esse chamado e aceitou
+
+E é tão bom saber que há
+Lugar aqui
+A graça nos chamou pra mesa
+Do Senhor
+
+Há lugar na casa
+Há perdão na casa
+Quando estamos juntos
+Nosso encontro é casa de Deus Pai
+
+Há esperança na casa
+Recomeço na casa
+Reunidos Nele
+Nosso encontro é casa de Deus Pai
+
+(Interlúdio)
+
+O som da Sua palavra
+Curou a nossa alma
+O Verbo nos amou
+Da solidão nos resgatou
+
+E é tão bom saber que há
+Lugar aqui
+A graça nos chamou pra mesa
+Do Senhor
+
+Há lugar na casa
+Há perdão na casa
+Quando estamos juntos
+Nosso encontro é casa de Deus Pai
+
+Há esperança na casa
+Recomeço na casa
+Reunidos Nele
+Nosso encontro é casa de Deus Pai
+
+Há lugar na casa
+Há perdão na casa
+Quando estamos juntos
+Nosso encontro é casa de Deus Pai
+
+Há esperança na casa
+Recomeço na casa
+Reunidos Nele
+Nosso encontro é casa
+
+De Deus Pai
+De Deus Pai
+De Deus Pai
+
+Do meu Pai
+Do teu Pai
+Do nosso Pai
+
+Há lugar na casa
+Há perdão na casa
+Quando estamos juntos
+Nosso encontro é casa de Deus Pai
+
+Há esperança na casa
+Recomeço na casa
+Reunidos Nele
+Nosso encontro é casa de Deus Pai`
+
 export const demoPublicFolderRepertoires: RepertoireListItem[] = [
   {
     id: 1001,
@@ -241,7 +513,7 @@ export const demoPublicFolderRepertoires: RepertoireListItem[] = [
     referenceUrl1: 'https://youtu.be/wWU1Bn6wy9o?si=qziZbrfOCCa5AgkF',
     referenceUrl2: null,
     playbackUrl: null,
-    lyrics: null,
+    lyrics: ALGO_NOVO_LYRICS,
     chordUrl: 'https://drive.google.com/file/d/1L3M26tDpVHrWk9WNvowKEnlh9OVVFtz0/view?usp=sharing',
     sheetMusicUrl: null,
     sopranoKitVoiceUrl: 'https://youtu.be/XX00lnNIRLQ?si=ouKabIfLcb9vtd3a&t=562',
@@ -265,7 +537,7 @@ export const demoPublicFolderRepertoires: RepertoireListItem[] = [
     referenceUrl1: 'https://youtu.be/kc9MbHxUHwg?si=w1cofKtBEToTkfZt',
     referenceUrl2: null,
     playbackUrl: null,
-    lyrics: null,
+    lyrics: EU_SOU_TEU_LYRICS,
     chordUrl: 'https://drive.google.com/file/d/1u_Z1Zm6hNFi97kJEcqzcAL4ayGlDxqdF/view?usp=sharing',
     sheetMusicUrl: null,
     sopranoKitVoiceUrl: 'https://youtu.be/Dv1zN-gH64Q?si=SPMglXU5KVXTPQ9m',
@@ -289,7 +561,7 @@ export const demoPublicFolderRepertoires: RepertoireListItem[] = [
     referenceUrl1: 'https://youtu.be/-go3Gt5TdmE?si=u1OOKzCQc_e-JrLH',
     referenceUrl2: null,
     playbackUrl: null,
-    lyrics: null,
+    lyrics: ME_AMA_LYRICS,
     chordUrl: 'https://drive.google.com/file/d/1PqpKgY2t2PHOzhEWQSsSMm7ApRB9oaDs/view?usp=sharing',
     sheetMusicUrl: null,
     sopranoKitVoiceUrl: 'https://youtu.be/vv1RbxmNc04?si=H69ILSbDcFXeH3Fv&t=364',
@@ -313,7 +585,7 @@ export const demoPublicFolderRepertoires: RepertoireListItem[] = [
     referenceUrl1: 'https://youtu.be/MpTuFJHaBg8?si=kyGEozyxZ7UpUqHV',
     referenceUrl2: null,
     playbackUrl: null,
-    lyrics: null,
+    lyrics: NA_CASA_LYRICS,
     chordUrl: 'https://drive.google.com/file/d/16ua0kUfSilFk3GNWDSLQi2IHUyLxdkcW/view?usp=sharing',
     sheetMusicUrl: null,
     sopranoKitVoiceUrl: 'https://youtu.be/LPw-bCs0vuM?si=Fss3OATW3fxQ29w7',
