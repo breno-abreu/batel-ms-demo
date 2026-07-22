@@ -115,7 +115,7 @@ export const demoRepertoireGroupApi = {
     return demoOk({
       id: group.id,
       name: 'BLESS Agosto de 2026',
-      description: 'Pasta demonstrativa: BLESS Agosto de 2026',
+      description: 'BLESS Agosto de 2026',
       itemCount: demoPublicFolderRepertoires.length
     })
   },
