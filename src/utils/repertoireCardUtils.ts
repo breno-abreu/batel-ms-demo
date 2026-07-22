@@ -14,6 +14,7 @@ export function hasVoiceKits(item: RepertoireListItem): boolean {
   return Boolean(
     item.sopranoKitVoiceUrl
     || item.contraltoKitVoiceUrl
+    || item.contraltoKitUnavailable
     || item.tenorKitVoiceUrl
   )
 }

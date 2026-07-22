@@ -227,6 +227,19 @@
         Contralto
       </a>
 
+      <button
+        v-else-if="item.contraltoKitUnavailable && shouldShowResource('contralto')"
+        type="button"
+        class="repertoire-song-card__resource"
+        disabled
+        title="Não disponível"
+        aria-label="Contralto não disponível"
+        @click.stop
+      >
+        <MicIcon :size="16" aria-hidden="true" />
+        Contralto indisponível
+      </button>
+
       <a
         v-if="item.tenorKitVoiceUrl && shouldShowResource('tenor')"
         class="repertoire-song-card__resource"
@@ -405,7 +418,7 @@ export default defineComponent({
         lyrics: Boolean(this.item.lyrics),
         playback: Boolean(this.item.playbackUrl),
         soprano: Boolean(this.item.sopranoKitVoiceUrl),
-        contralto: Boolean(this.item.contraltoKitVoiceUrl),
+        contralto: Boolean(this.item.contraltoKitVoiceUrl || this.item.contraltoKitUnavailable),
         tenor: Boolean(this.item.tenorKitVoiceUrl),
         chord: Boolean(this.item.chordUrl),
         sheetMusic: Boolean(this.item.sheetMusicUrl)

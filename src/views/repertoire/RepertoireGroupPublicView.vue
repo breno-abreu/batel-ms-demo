@@ -209,16 +209,18 @@ type ResourceFilterSelectOption = {
   icon: Component
 }
 
-const PUBLIC_GROUP_CHORD_URL =
-  'https://drive.google.com/file/d/16ua0kUfSilFk3GNWDSLQi2IHUyLxdkcW/view?usp=sharing'
-
 const RESOURCE_FILTER_OPTIONS: ResourceFilterOption[] = [
   { value: 'reference1', label: 'Referência 1', icon: ExternalLinkIcon, isAvailable: (item) => Boolean(item.referenceUrl1) },
   { value: 'reference2', label: 'Referência 2', icon: ExternalLinkIcon, isAvailable: (item) => Boolean(item.referenceUrl2) },
   { value: 'lyrics', label: 'Letra', icon: ScrollTextIcon, isAvailable: (item) => Boolean(item.lyrics) },
   { value: 'playback', label: 'Playback', icon: CirclePlayIcon, isAvailable: (item) => Boolean(item.playbackUrl) },
   { value: 'soprano', label: 'Soprano', icon: MicIcon, isAvailable: (item) => Boolean(item.sopranoKitVoiceUrl) },
-  { value: 'contralto', label: 'Contralto', icon: MicIcon, isAvailable: (item) => Boolean(item.contraltoKitVoiceUrl) },
+  {
+    value: 'contralto',
+    label: 'Contralto',
+    icon: MicIcon,
+    isAvailable: (item) => Boolean(item.contraltoKitVoiceUrl || item.contraltoKitUnavailable)
+  },
   { value: 'tenor', label: 'Tenor', icon: MicIcon, isAvailable: (item) => Boolean(item.tenorKitVoiceUrl) },
   { value: 'chord', label: 'Cifra', icon: MusicIcon, isAvailable: (item) => Boolean(item.chordUrl) },
   { value: 'sheetMusic', label: 'Partitura', icon: FileMusicIcon, isAvailable: (item) => Boolean(item.sheetMusicUrl) }
@@ -311,10 +313,7 @@ export default defineComponent({
         }
 
         this.group = groupResponse.payload
-        this.songs = (songsResponse.payload ?? []).map((item) => ({
-          ...item,
-          chordUrl: PUBLIC_GROUP_CHORD_URL
-        }))
+        this.songs = songsResponse.payload ?? []
         this.resourceFilter = resolvePublicResourceFilter(
           this.resourceFilterOptions.map((option) => option.value)
         )

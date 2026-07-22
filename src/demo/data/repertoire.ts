@@ -126,3 +126,128 @@ export const demoRepertoireGroupItems: Record<number, number[]> = Object.fromEnt
     return [group.id, ids]
   })
 )
+
+/** Músicas da pasta pública compartilhada (demo BLESS). */
+export const demoPublicFolderRepertoires: RepertoireListItem[] = [
+  {
+    id: 1001,
+    songName: 'A Boa Parte',
+    author: 'FHOP Music',
+    version: 'BLESS',
+    key: 'E',
+    difficultyLevelName: 'Média',
+    popularityLevelName: 'Conhecida fora da IASD',
+    referenceUrl1: 'https://youtu.be/dlGOiuxSzVw?si=CRpeYrBQD6SLy81Q',
+    referenceUrl2: null,
+    playbackUrl: null,
+    lyrics: null,
+    chordUrl: 'https://drive.google.com/file/d/1gpLxho7eJ6PVlrh-_RPgCmJ9fdseu4N9/view?usp=sharing',
+    sheetMusicUrl: null,
+    sopranoKitVoiceUrl: 'https://youtu.be/exv83Ff6sMo?si=DNTsi-jXitPubGLU&t=481',
+    contraltoKitVoiceUrl: 'https://youtu.be/exv83Ff6sMo?si=4CQkJzeVnR2zGK75&t=384',
+    tenorKitVoiceUrl: 'https://youtu.be/EPfzk-iti6Q?si=LrxVfVq92hdHZpSQ&t=38',
+    notes: null,
+    musicalThemes: [
+      { id: 101, name: 'Worship' },
+      { id: 102, name: 'Emocional' }
+    ],
+    isFavorite: false
+  },
+  {
+    id: 1002,
+    songName: 'Algo Novo',
+    author: 'Kemuel',
+    version: 'BLESS',
+    key: 'C',
+    difficultyLevelName: 'Fácil',
+    popularityLevelName: 'Muito popular fora da IASD',
+    referenceUrl1: 'https://youtu.be/wWU1Bn6wy9o?si=qziZbrfOCCa5AgkF',
+    referenceUrl2: null,
+    playbackUrl: null,
+    lyrics: null,
+    chordUrl: 'https://drive.google.com/file/d/1L3M26tDpVHrWk9WNvowKEnlh9OVVFtz0/view?usp=sharing',
+    sheetMusicUrl: null,
+    sopranoKitVoiceUrl: 'https://youtu.be/XX00lnNIRLQ?si=ouKabIfLcb9vtd3a&t=562',
+    contraltoKitVoiceUrl: 'https://youtu.be/XX00lnNIRLQ?si=QDxvwl9gkCjdrXfn&t=301',
+    tenorKitVoiceUrl: 'https://youtu.be/XX00lnNIRLQ?si=KFS2GPIEbEVHuUNm',
+    notes: null,
+    musicalThemes: [
+      { id: 101, name: 'Worship' },
+      { id: 103, name: 'Incremental' }
+    ],
+    isFavorite: false
+  },
+  {
+    id: 1003,
+    songName: 'Eu Sou Teu',
+    author: 'Celebra SP',
+    version: 'BLESS',
+    key: 'F',
+    difficultyLevelName: 'Média',
+    popularityLevelName: 'Conhecida dentro da IASD',
+    referenceUrl1: 'https://youtu.be/kc9MbHxUHwg?si=w1cofKtBEToTkfZt',
+    referenceUrl2: null,
+    playbackUrl: null,
+    lyrics: null,
+    chordUrl: 'https://drive.google.com/file/d/1u_Z1Zm6hNFi97kJEcqzcAL4ayGlDxqdF/view?usp=sharing',
+    sheetMusicUrl: null,
+    sopranoKitVoiceUrl: 'https://youtu.be/Dv1zN-gH64Q?si=SPMglXU5KVXTPQ9m',
+    contraltoKitVoiceUrl: 'https://youtu.be/vI_3zw1UXzs?si=JfGbV0X257-1Qq8A',
+    tenorKitVoiceUrl: 'https://youtu.be/aNOFQrQKKWQ?si=De6mX9LnbpEX949t',
+    notes: null,
+    musicalThemes: [
+      { id: 104, name: 'Pop/Rock' },
+      { id: 105, name: 'Animada' }
+    ],
+    isFavorite: false
+  },
+  {
+    id: 1004,
+    songName: 'Me Ama',
+    author: 'Diante do Trono',
+    version: 'BLESS',
+    key: 'A',
+    difficultyLevelName: 'Fácil',
+    popularityLevelName: 'Popular',
+    referenceUrl1: 'https://youtu.be/-go3Gt5TdmE?si=u1OOKzCQc_e-JrLH',
+    referenceUrl2: null,
+    playbackUrl: null,
+    lyrics: null,
+    chordUrl: 'https://drive.google.com/file/d/1PqpKgY2t2PHOzhEWQSsSMm7ApRB9oaDs/view?usp=sharing',
+    sheetMusicUrl: null,
+    sopranoKitVoiceUrl: 'https://youtu.be/vv1RbxmNc04?si=H69ILSbDcFXeH3Fv&t=364',
+    contraltoKitVoiceUrl: 'https://youtu.be/vv1RbxmNc04?si=cHO4ilx9JU1HTse2&t=209',
+    tenorKitVoiceUrl: 'https://youtu.be/ySpR32x9g2E?si=Lpx6wmCqsSGgbifH&t=140',
+    notes: null,
+    musicalThemes: [
+      { id: 101, name: 'Worship' },
+      { id: 102, name: 'Emocional' }
+    ],
+    isFavorite: false
+  },
+  {
+    id: 1005,
+    songName: 'Na Casa',
+    author: 'Nova Semente',
+    version: 'BLESS',
+    key: 'D',
+    difficultyLevelName: 'Fácil',
+    popularityLevelName: 'Conhecida',
+    referenceUrl1: 'https://youtu.be/MpTuFJHaBg8?si=kyGEozyxZ7UpUqHV',
+    referenceUrl2: null,
+    playbackUrl: null,
+    lyrics: null,
+    chordUrl: 'https://drive.google.com/file/d/16ua0kUfSilFk3GNWDSLQi2IHUyLxdkcW/view?usp=sharing',
+    sheetMusicUrl: null,
+    sopranoKitVoiceUrl: 'https://youtu.be/LPw-bCs0vuM?si=Fss3OATW3fxQ29w7',
+    contraltoKitVoiceUrl: null,
+    contraltoKitUnavailable: true,
+    tenorKitVoiceUrl: 'https://youtu.be/qVPTuAmPFM0?si=Xx1x6EJ8tYdJUB2b',
+    notes: null,
+    musicalThemes: [
+      { id: 101, name: 'Worship' },
+      { id: 103, name: 'Incremental' }
+    ],
+    isFavorite: false
+  }
+]

@@ -1,4 +1,5 @@
 import {
+  demoPublicFolderRepertoires,
   demoRepertoireGroupItems,
   demoRepertoireGroups,
   demoRepertoireList,
@@ -115,17 +116,10 @@ export const demoRepertoireGroupApi = {
       id: group.id,
       name: group.name,
       description: group.description,
-      itemCount: group.itemCount
+      itemCount: demoPublicFolderRepertoires.length
     })
   },
   listPublicRepertoires: async (_shareHash: string) => {
-    const group = demoRepertoireGroups[0]
-    const ids = demoRepertoireGroupItems[group.id] ?? []
-    const items = ids
-      .map((repertoireId) => demoRepertoires.find((item) => item.id === repertoireId))
-      .filter(Boolean)
-      .map((item) => toRepertoireListItem(item!))
-
-    return demoOk(items)
+    return demoOk(demoPublicFolderRepertoires)
   }
 }

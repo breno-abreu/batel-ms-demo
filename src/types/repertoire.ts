@@ -122,6 +122,7 @@ export type RepertoireListItem = {
   sheetMusicUrl: string | null
   sopranoKitVoiceUrl: string | null
   contraltoKitVoiceUrl: string | null
+  contraltoKitUnavailable?: boolean
   tenorKitVoiceUrl: string | null
   notes: string | null
   musicalThemes: MusicalThemeSummary[]
