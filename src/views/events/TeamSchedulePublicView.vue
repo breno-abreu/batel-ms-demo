@@ -178,6 +178,10 @@ import RepertoireSongCard, {
   type RepertoireSongCardResourceFilter
 } from '@/components/repertoire/RepertoireSongCard.vue'
 import {
+  resolvePublicResourceFilter,
+  setPublicResourceFilter
+} from '@/services/publicResourceFilterStorage'
+import {
   teamScheduleService,
   type PublicTeamSchedule
 } from '@/services/teamScheduleService'
@@ -310,7 +314,6 @@ export default defineComponent({
       }
 
       this.pageLoading = true
-      this.resourceFilter = 'all'
       this.resourceFilterOpen = false
 
       try {
@@ -325,6 +328,9 @@ export default defineComponent({
 
         this.schedule = scheduleResponse.payload
         this.songs = songsResponse.payload ?? []
+        this.resourceFilter = resolvePublicResourceFilter(
+          this.resourceFilterOptions.map((option) => option.value)
+        )
       } catch {
         await this.$router.replace({ name: 'public-not-found' })
       } finally {
@@ -339,6 +345,7 @@ export default defineComponent({
     selectResourceFilter(value: RepertoireSongCardResourceFilter): void {
       this.resourceFilter = value
       this.resourceFilterOpen = false
+      setPublicResourceFilter(value)
     },
 
     openLyricsModal(item: RepertoireListItem): void {

@@ -189,6 +189,10 @@ import RepertoireSongCard, {
   type RepertoireSongCardResourceFilter
 } from '@/components/repertoire/RepertoireSongCard.vue'
 import { repertoireGroupService } from '@/services/repertoireGroupService'
+import {
+  resolvePublicResourceFilter,
+  setPublicResourceFilter
+} from '@/services/publicResourceFilterStorage'
 import type { RepertoireListItem } from '@/types/repertoire'
 import type { PublicRepertoireGroup } from '@/types/repertoireGroup'
 
@@ -294,7 +298,6 @@ export default defineComponent({
       }
 
       this.pageLoading = true
-      this.resourceFilter = 'all'
       this.resourceFilterOpen = false
 
       try {
@@ -312,6 +315,9 @@ export default defineComponent({
           ...item,
           chordUrl: PUBLIC_GROUP_CHORD_URL
         }))
+        this.resourceFilter = resolvePublicResourceFilter(
+          this.resourceFilterOptions.map((option) => option.value)
+        )
       } catch {
         await this.$router.replace({ name: 'public-not-found' })
       } finally {
@@ -326,6 +332,7 @@ export default defineComponent({
     selectResourceFilter(value: RepertoireSongCardResourceFilter): void {
       this.resourceFilter = value
       this.resourceFilterOpen = false
+      setPublicResourceFilter(value)
     },
 
     openLyricsModal(item: RepertoireListItem): void {
