@@ -12,6 +12,27 @@ export function buildAppAbsoluteUrl(path: string): string {
   return `${window.location.origin}${relative}`
 }
 
+/** Caminho da app sem o BASE_URL (ex.: `/public/repertorio-pasta/demo`). */
+export function getAppPathname(pathname = typeof window !== 'undefined' ? window.location.pathname : '/'): string {
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
+  let path = pathname || '/'
+
+  if (base && path.startsWith(base)) {
+    path = path.slice(base.length) || '/'
+  }
+
+  if (!path.startsWith('/')) {
+    path = `/${path}`
+  }
+
+  return path
+}
+
+export function isPublicSharePath(pathname?: string): boolean {
+  const path = getAppPathname(pathname)
+  return path === '/public' || path.startsWith('/public/')
+}
+
 export function normalizeOptionalUrl(value: string): string | null {
   const trimmed = value.trim()
 

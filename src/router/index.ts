@@ -271,14 +271,16 @@ const router = createRouter({
       redirect: (to) => ({
         name: 'repertoire-group-public',
         params: { shareHash: to.params.shareHash }
-      })
+      }),
+      meta: { publicShare: true, hideNavbar: true }
     },
     {
       path: '/public/pastas/:shareHash',
       redirect: (to) => ({
         name: 'repertoire-group-public',
         params: { shareHash: to.params.shareHash }
-      })
+      }),
+      meta: { publicShare: true, hideNavbar: true }
     },
     {
       path: '/public/links-uteis/:shareHash',
@@ -297,7 +299,8 @@ const router = createRouter({
       redirect: (to) => ({
         name: 'team-schedule-public',
         params: { shareHash: to.params.shareHash }
-      })
+      }),
+      meta: { publicShare: true, hideNavbar: true }
     },
     {
       path: '/public/escalas-mensais/:shareHash',
@@ -319,7 +322,8 @@ const router = createRouter({
     },
     {
       path: '/public/:pathMatch(.*)*',
-      redirect: { name: 'public-not-found' }
+      redirect: { name: 'public-not-found' },
+      meta: { publicShare: true, hideNavbar: true }
     },
     {
       path: '/404',

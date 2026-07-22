@@ -56,7 +56,9 @@ function bootstrap(): void {
     }
   })
 
-  app.mount('#app')
+  void router.isReady().then(() => {
+    app.mount('#app')
+  })
 }
 
 bootstrap()

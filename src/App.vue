@@ -40,6 +40,7 @@ import AppNavbar from '@/components/navbar/AppNavbar.vue'
 import AppSidebar from '@/components/navbar/AppSidebar.vue'
 import AppToastContainer from '@/components/feedback/AppToastContainer.vue'
 import MobileUnsupportedView from '@/views/errors/MobileUnsupportedView.vue'
+import { isPublicSharePath } from '@/utils/urlUtils'
 
 const MOBILE_VIEWPORT_QUERY = '(max-width: 720px)'
 
@@ -65,20 +66,29 @@ export default defineComponent({
   },
   computed: {
     isPublicShareRoute(): boolean {
-      return this.$route.matched.some((record) => record.meta.publicShare === true)
+      if (this.$route.matched.some((record) => record.meta.publicShare === true)) {
+        return true
+      }
+
+      // Fallback for the first paint / redirect hops before meta is available.
+      if (isPublicSharePath(this.$route.path) || isPublicSharePath()) {
+        return true
+      }
+
+      return false
     },
     isMobileUnsupported(): boolean {
       return this.isNarrowViewport && !this.isPublicShareRoute
     },
     showSidebar(): boolean {
-      if (this.isMobileUnsupported) {
+      if (this.isMobileUnsupported || this.isPublicShareRoute) {
         return false
       }
 
       return this.$route.matched.some((record) => record.meta.appShell === true)
     },
     showNavbar(): boolean {
-      if (this.isMobileUnsupported) {
+      if (this.isMobileUnsupported || this.isPublicShareRoute) {
         return false
       }
 
@@ -92,7 +102,7 @@ export default defineComponent({
       return this.$route.matched.some((record) => record.meta.appShell === true)
     },
     showBirthdayGreeting(): boolean {
-      if (this.isMobileUnsupported) {
+      if (this.isMobileUnsupported || this.isPublicShareRoute) {
         return false
       }
 
