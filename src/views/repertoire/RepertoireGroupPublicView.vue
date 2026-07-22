@@ -205,6 +205,9 @@ type ResourceFilterSelectOption = {
   icon: Component
 }
 
+const PUBLIC_GROUP_CHORD_URL =
+  'https://drive.google.com/file/d/16ua0kUfSilFk3GNWDSLQi2IHUyLxdkcW/view?usp=sharing'
+
 const RESOURCE_FILTER_OPTIONS: ResourceFilterOption[] = [
   { value: 'reference1', label: 'Referência 1', icon: ExternalLinkIcon, isAvailable: (item) => Boolean(item.referenceUrl1) },
   { value: 'reference2', label: 'Referência 2', icon: ExternalLinkIcon, isAvailable: (item) => Boolean(item.referenceUrl2) },
@@ -305,7 +308,10 @@ export default defineComponent({
         }
 
         this.group = groupResponse.payload
-        this.songs = songsResponse.payload ?? []
+        this.songs = (songsResponse.payload ?? []).map((item) => ({
+          ...item,
+          chordUrl: PUBLIC_GROUP_CHORD_URL
+        }))
       } catch {
         await this.$router.replace({ name: 'public-not-found' })
       } finally {
