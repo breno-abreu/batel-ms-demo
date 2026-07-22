@@ -128,6 +128,83 @@ export const demoRepertoireGroupItems: Record<number, number[]> = Object.fromEnt
 )
 
 /** Músicas da pasta pública compartilhada (demo BLESS). */
+const A_BOA_PARTE_LYRICS = `Precioso Deus
+Aos Teus pés aqui estou
+O que eu poderia Te oferecer
+Por tudo o que Tu és
+
+Tudo o que tenho
+Eu derramo aos Teus pés
+Não importa o quanto custou
+Jesus, Teu valor é maior
+
+Eu encontrei o meu tesouro
+Eu encontrei o bem mais precioso
+Eu encontrei o meu tesouro
+Eu encontrei o bem mais precioso
+
+(Interlúdio)
+
+Precioso Deus
+Tuas palavras são mais desejáveis
+Tuas palavras são mais desejáveis
+Que o mais doce mel
+
+Tudo o que tenho
+Eu derramo aos Teus pés
+Não importa o quanto custou
+Jesus, Teu valor é maior
+Jesus, Teu valor é maior
+
+Eu encontrei o meu tesouro
+Eu encontrei o bem mais precioso
+Eu encontrei o meu tesouro
+Eu encontrei o bem mais precioso
+
+(Interlúdio)
+
+Como Maria, que estava aos Teus pés
+E dissestes a ela: essa é a boa parte
+Que nunca, nunca será tirada
+
+Como Maria, que estava aos Teus pés
+E dissestes a ela: essa é a boa parte
+Que nunca, nunca será tirada
+
+Como Maria, que estava aos Teus pés
+E dissestes a ela: essa é a boa parte
+Que nunca, nunca será tirada
+
+Como Maria, que estava aos Teus pés
+E dissestes a ela: essa é a boa parte
+Que nunca, nunca será tirada
+
+Eu encontrei o meu tesouro
+Eu encontrei o bem mais precioso
+Eu encontrei o meu tesouro
+Eu encontrei o bem mais precioso
+
+Como Maria, que estava aos Teus pés
+E dissestes a ela: essa é a boa parte
+Que nunca, nunca será tirada
+
+Como Maria, que estava aos Teus pés
+E dissestes a ela: essa é a boa parte
+Que nunca, nunca será tirada
+
+Como Maria, que estava aos Teus pés
+E dissestes a ela: essa é a boa parte
+Que nunca, nunca será tirada
+
+Como Maria, que estava aos Teus pés
+E dissestes a ela: essa é a boa parte
+Que nunca, nunca será tirada
+
+Eu encontrei o meu tesouro
+Eu encontrei o bem mais precioso
+Eu encontrei o meu tesouro
+Eu encontrei o bem mais precioso`
+
 export const demoPublicFolderRepertoires: RepertoireListItem[] = [
   {
     id: 1001,
@@ -140,7 +217,7 @@ export const demoPublicFolderRepertoires: RepertoireListItem[] = [
     referenceUrl1: 'https://youtu.be/dlGOiuxSzVw?si=CRpeYrBQD6SLy81Q',
     referenceUrl2: null,
     playbackUrl: null,
-    lyrics: null,
+    lyrics: A_BOA_PARTE_LYRICS,
     chordUrl: 'https://drive.google.com/file/d/1gpLxho7eJ6PVlrh-_RPgCmJ9fdseu4N9/view?usp=sharing',
     sheetMusicUrl: null,
     sopranoKitVoiceUrl: 'https://youtu.be/exv83Ff6sMo?si=DNTsi-jXitPubGLU&t=481',

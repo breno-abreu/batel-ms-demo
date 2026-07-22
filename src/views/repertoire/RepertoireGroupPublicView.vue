@@ -154,18 +154,27 @@
 
     <AppFormModal
       v-model="lyricsModalVisible"
-      title="Letra"
+      :title="lyricsItem?.songName ?? 'Letra'"
       confirm-label="Fechar"
       single-action
+      :scrollable-body="true"
       @confirm="closeLyricsModal"
       @cancel="closeLyricsModal"
     >
       <div class="repertoire-song-lyrics">
-        <p class="repertoire-song-lyrics__title">
-          {{ lyricsItem?.songName }}
-        </p>
         <pre class="repertoire-song-lyrics__content">{{ lyricsItem?.lyrics }}</pre>
       </div>
+
+      <template #actions-start>
+        <button
+          type="button"
+          class="field-button field-button--ghost"
+          :disabled="!lyricsItem?.lyrics"
+          @click="copyLyrics"
+        >
+          Copiar letra
+        </button>
+      </template>
     </AppFormModal>
   </section>
 </template>
@@ -193,6 +202,7 @@ import {
   resolvePublicResourceFilter,
   setPublicResourceFilter
 } from '@/services/publicResourceFilterStorage'
+import { toastService } from '@/services/toastService'
 import type { RepertoireListItem } from '@/types/repertoire'
 import type { PublicRepertoireGroup } from '@/types/repertoireGroup'
 
@@ -342,6 +352,21 @@ export default defineComponent({
     closeLyricsModal(): void {
       this.lyricsModalVisible = false
       this.lyricsItem = null
+    },
+
+    async copyLyrics(): Promise<void> {
+      const lyrics = this.lyricsItem?.lyrics?.trim()
+
+      if (!lyrics) {
+        return
+      }
+
+      try {
+        await navigator.clipboard.writeText(lyrics)
+        toastService.success('Letra copiada para a área de transferência.')
+      } catch {
+        toastService.error('Não foi possível copiar a letra.')
+      }
     }
   }
 })
